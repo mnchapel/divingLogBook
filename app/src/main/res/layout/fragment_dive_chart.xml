@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:ap="http://schemas.android.com/apk/res-auto"
+    android:background="#f1f1f1"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Chart section -->
+        <TextView
+            android:id="@+id/generalSection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="Chart" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:elevation="3dp"
+            android:background="#FFFFFF">
+
+            <!-- Chart -->
+            <com.androidplot.xy.XYPlot
+                style="@style/APDefacto.Dark"
+                android:id="@+id/plot"
+                android:layout_width="fill_parent"
+                android:layout_height="327dp"
+                ap:title="A Simple XY Plot"
+                ap:rangeTitle="range"
+                ap:domainTitle="domain"
+                ap:lineLabels="left|top"
+                ap:lineLabelRotationTop="0"
+                ap:backgroundColor="@color/white"
+                ap:graphBackgroundColor="@color/white"
+                ap:gridBackgroundColor="@color/blue"
+                ap:lineLabelTextColorTop="@color/black"
+                ap:lineLabelTextColorLeft="@color/black"
+                ap:domainOriginLineColor="@color/black"
+                ap:rangeOriginLineColor="@color/black"
+                ap:marginBottom="0dp"
+                ap:marginTop="0dp"
+                ap:marginLeft="0dp"
+                ap:marginRight="0dp"
+                ap:lineLabelAlignTop="center"
+                ap:lineLabelInsetTop="-1dp"/>
+
+            <SeekBar
+                android:id="@+id/seekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- Time text -->
+            <TextView
+                android:id="@+id/diveChartTimeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Time"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="@color/black" />
+
+            <!-- Time value -->
+            <TextView
+                android:id="@+id/diveChartTimeValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="@color/black" />
+
+            <!-- Depth text -->
+            <TextView
+                android:id="@+id/diveChartDepthText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Depth"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="@color/black" />
+
+            <!-- Depth value -->
+            <TextView
+                android:id="@+id/diveChartDepthValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

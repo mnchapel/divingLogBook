@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">DivingLogBook</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="drawer_array">
+        <item>Log Book</item>
+        <item>Statistics</item>
+        <item>Load new dives</item>
+    </string-array>
+
+    <string name="drawer_log_book">Log Book</string>
+    <string name="drawer_statistics">Statistics</string>
+    <string name="drawer_load_new_dives">Load new dives</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+    <string name="title_activity_test">test</string>
+    <string name="title_activity_dive_summary_edit">Edit Dive</string>
+
+    <string-array name="objective_name">
+        <item>Exploration</item>
+        <item>Technical</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/menu_top"
+        android:checkableBehavior="single">
+        <item
+            android:checked="true"
+            android:id="@+id/drawer_item_log_book"
+            android:title="@string/drawer_log_book"/>
+        <item
+            android:id="@+id/drawer_item_statistics"
+            android:title="@string/drawer_statistics"/>
+    </group>
+
+    <group
+        android:id="@+id/menu_bottom"
+        android:checkableBehavior="none">
+
+        <item
+            android:id="@+id/drawer_item_load_new_dives"
+            android:title="@string/drawer_load_new_dives" >
+        </item>
+    </group>
+</menu>
