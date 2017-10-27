@@ -28,7 +28,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 import java.util.TreeMap;
 
 
@@ -43,14 +48,8 @@ public class HomeMenuActivity
     //
     private  ActionBarDrawerToggle drawerToggle;
 
-    //
-    private CharSequence title;
-
-    //
-    private TreeMap<String, Dive> diveList;
-
-    //
-    public int test;
+    // The list of all dives.
+    private List<Dive> diveList;
 
 
     public final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 0;
@@ -115,10 +114,7 @@ public class HomeMenuActivity
 
         }
 
-
-
-
-        diveList = new TreeMap<>();
+        diveList = new ArrayList<>();
 
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -132,7 +128,7 @@ public class HomeMenuActivity
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        try {
+        /*try {
             deleteDive();
         } catch (IOException e) {
             e.printStackTrace();
@@ -140,7 +136,7 @@ public class HomeMenuActivity
             e.printStackTrace();
         }
 
-        /*try {
+        try {
             copyDiveToInternalStorage();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -300,11 +296,12 @@ public class HomeMenuActivity
             InputStream is = new FileInputStream(diveFile);
 
             Dive dive = diveXmlDocument.readDive(this, is);
-            String s = dive.getDate()+dive.getTimeIn();
-            diveList.put(dive.getDate()+dive.getTimeIn(), dive);
+            diveList.add(dive);
 
             is.close();
         }
+
+        Collections.sort(diveList);
     }
 
 
@@ -323,13 +320,6 @@ public class HomeMenuActivity
             InputStream is_assets = am.open(dive_files.get(i));
             copy(is_assets, file_internal_storage);
         }
-
-
-        /*File file = this.getFilesDir();
-        File[] dive_file = file.listFiles();
-        for(int i=0; i<dive_file.length; i++) {
-            Log.i("Files", dive_file[i].getName());
-        }*/
     }
 
 
@@ -395,7 +385,6 @@ public class HomeMenuActivity
 
     @Override
     public void setTitle(CharSequence title) {
-        this.title = title;
         getSupportActionBar().setTitle(title);
     }
 
@@ -404,7 +393,7 @@ public class HomeMenuActivity
      * Getter
      * @return the list of all dives.
      */
-    public TreeMap<String,Dive> getDiveList() {
+    public List<Dive> getDiveList() {
         return diveList;
     }
 
@@ -413,7 +402,7 @@ public class HomeMenuActivity
      * Getter
      * @return one dive.
      */
-    public Dive getDive(String key) {
-        return diveList.get(key);
+    public Dive getDive(int divePosition) {
+        return diveList.get(divePosition);
     }
 }

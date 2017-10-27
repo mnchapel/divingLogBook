@@ -24,7 +24,7 @@ public class DiveActivity extends Fragment {
         View view = inflater.inflate(R.layout.activity_dive, container, false);
 
         HomeMenuActivity activity = (HomeMenuActivity) getActivity();
-        String diveKey = getArguments().getString("diveKey");
+        int diveKey = getArguments().getInt("diveKey");
         dive = activity.getDive(diveKey);
 
         tab_layout = (TabLayout) view.findViewById(R.id.tab_layout);

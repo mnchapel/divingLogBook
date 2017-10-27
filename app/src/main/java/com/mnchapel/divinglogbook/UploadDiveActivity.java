@@ -68,7 +68,7 @@ public class UploadDiveActivity {
      * @brief Upload dive from the USB external storage.
      */
     public void uploadDive(Context context,
-                           Map<String, Dive> diveList) throws IOException, XmlPullParserException {
+                           List<Dive> diveList) throws IOException, XmlPullParserException {
         uploadDiveList = new ArrayList<Dive>();
 
         loadDive(context);
@@ -77,6 +77,7 @@ public class UploadDiveActivity {
         Toast toast = Toast.makeText(context, uploadDiveList.size()+" new dives loaded.", duration);
         toast.show();
 
+        // TODO : check if a dive exists before save it on internal storage.
         saveDive(context);
     }
 

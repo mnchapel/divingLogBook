@@ -2,6 +2,7 @@ package com.mnchapel.divinglogbook;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -12,7 +13,7 @@ import java.util.List;
  * Created by Marie-Neige on 11/08/2017.
  */
 
-public class Dive implements Parcelable {
+public class Dive implements Parcelable, Comparable<Dive> {
 
     //
     private float bottomTemperature;
@@ -40,12 +41,12 @@ public class Dive implements Parcelable {
     /**
      * @brief Default constructor
      */
-    public Dive (){    }
+    public Dive() {}
 
 
 
     /**
-     * @brief
+     * @brief Constructor
      *
      * @param in
      */
@@ -55,6 +56,22 @@ public class Dive implements Parcelable {
         maxDepth = in.readFloat();
         sampleInterval = in.readInt();
         // TODO add calendar
+    }
+
+
+
+    /**
+     *
+     * @param dive
+     * @return
+     */
+    @Override
+    public int compareTo(@NonNull Dive dive) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        String thisDive = dateFormat.format(startTime.getTime());
+        String otherDive = dateFormat.format(dive.getStartTime().getTime());
+
+        return thisDive.compareTo(otherDive)*-1;
     }
 
 
