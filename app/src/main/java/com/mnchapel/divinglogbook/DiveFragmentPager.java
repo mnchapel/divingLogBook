@@ -51,6 +51,9 @@ public class DiveFragmentPager extends FragmentStatePagerAdapter {
             case 2:
                 tab = new DiveEquipmentFragment();
                 break;
+            case 3:
+                tab = new DiveBioFragment();
+                break;
             default:
                 return null;
         }

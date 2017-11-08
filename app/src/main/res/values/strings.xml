@@ -24,4 +24,21 @@
         <item>Technical</item>
     </string-array>
 
+
+    <!-- Dive Summary -->
+    <string name="dive_summary_general_section_title">General</string>
+    <string name="dive_summary_conditions_section_title">Conditions</string>
+    <string name="dive_summary_summary_section_title">Summary</string>
+
+    <!-- Icons -->
+    <string name="ic_buddy">Buddy icon</string>
+    <string name="ic_calendar">Calendar icon</string>
+    <string name="ic_depth">Depth icon</string>
+    <string name="ic_duration">Duration icon</string>
+    <string name="ic_instructor">Instructor icon</string>
+    <string name="ic_map_marker">Map marker icon</string>
+    <string name="ic_target">Target icon</string>
+    <string name="ic_thermometer">Thermometer icon</string>
+    <string name="ic_visibility">Visibility icon</string>
+
 </resources>

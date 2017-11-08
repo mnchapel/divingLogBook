@@ -1,160 +1,421 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#f1f1f1"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.mnchapel.divinglogbook.DiveSummaryEditActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-    </android.support.design.widget.AppBarLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="10dp"
-        android:focusableInTouchMode="true">
-
-        <!-- Date -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/diveSummaryDateText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                android:textColor="@color/black"
-                android:text="Date: " />
-
-            <TextView
-                android:id="@+id/diveSummaryDateValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                android:textColor="@color/grey" />
-
-            <ImageButton
-                android:id="@+id/datePickerButton"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:scaleType="fitCenter"
-                android:padding="5dp"
-                android:src="@android:drawable/ic_menu_today" />
-        </LinearLayout>
-
-        <!-- Site -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/diveSummarySiteText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:text="Site: "
-                android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                android:textColor="@color/black"
-                tools:layout_editor_absoluteX="-67dp"
-                tools:layout_editor_absoluteY="212dp" />
-
-            <EditText
-                android:id="@+id/diveSummarySiteValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-
-        </LinearLayout>
-
-        <!-- Town/Counrty -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/diveSummaryTownCountryText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="0"
-                android:layout_row="2"
-                android:paddingBottom="10dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                android:textColor="@color/black"
-                android:text="Town/Country: " />
-            tools:layout_editor_absoluteY="212dp" />
-
-            <EditText
-                android:id="@+id/diveSummaryTownCountryValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="1"
-                android:layout_row="2"
-                android:paddingBottom="10dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-        </LinearLayout>
-
-        <!-- Objective -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/diveSummaryObjectiveText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="0"
-                android:layout_row="3"
-                android:paddingBottom="10dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                android:textColor="@color/black"
-                android:text="Objective: " />
-
-            <Spinner
-                android:id="@+id/objectiveSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:entries="@array/objective_name" />
-
-        </LinearLayout>
-
-        <!-- Save/Cancel buttons -->
+        android:layout_height="match_parent" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:paddingBottom="10dp">
 
-            <Button
-                android:id="@+id/saveButton"
-                android:layout_width="wrap_content"
+            <!-- General section -->
+            <TextView
+                android:id="@+id/generalSection"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Save" />
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="General" />
 
-            <Button
-                android:id="@+id/cancelButton"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Cancel" />
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:elevation="3dp"
+                android:background="#FFFFFF">
+
+                <!-- Date -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/diveSummaryEditDateText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/black"
+                        android:text="Date: " />
+
+                    <TextView
+                        android:id="@+id/diveSummaryEditDateValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/grey" />
+                </LinearLayout>
+
+                <!-- Site -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/diveSummaryEditSiteText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10dp"
+                        android:text="Site: "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/black"
+                        tools:layout_editor_absoluteX="-67dp"
+                        tools:layout_editor_absoluteY="212dp" />
+
+                    <EditText
+                        android:id="@+id/diveSummaryEditSiteValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                </LinearLayout> <!-- Site end-->
+
+                <!-- Town/Counrty -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/diveSummaryEditTownCountryText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="0"
+                        android:layout_row="2"
+                        android:paddingBottom="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/black"
+                        android:text="Town/Country: " />
+
+                    <EditText
+                        android:id="@+id/diveSummaryEditTownCountryValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:layout_row="2"
+                        android:paddingBottom="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                </LinearLayout> <!-- Town/Counrty end-->
+
+                <!-- Objective -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/diveSummaryEditObjectiveText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="0"
+                        android:layout_row="3"
+                        android:paddingBottom="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/black"
+                        android:text="Objective: " />
+
+                    <Spinner
+                        android:id="@+id/diveSummaryEditObjectiveValue"
+                        android:entries="@array/objective_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                </LinearLayout> <!-- Objective end -->
+
+                <!-- Buddy -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/diveSummaryEdiBuddyText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="0"
+                        android:layout_row="3"
+                        android:paddingBottom="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/black"
+                        android:text="Buddy: " />
+
+                    <EditText
+                        android:id="@+id/diveSummaryEditBuddyValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:layout_row="2"
+                        android:paddingBottom="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                </LinearLayout> <!-- Buddy end -->
+
+                <!-- Instructor -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/diveSummaryEditInstructorText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="0"
+                        android:layout_row="3"
+                        android:paddingBottom="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/black"
+                        android:text="Instructor: " />
+
+                    <EditText
+                        android:id="@+id/diveSummaryEditInstructorValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:layout_row="2"
+                        android:paddingBottom="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                </LinearLayout> <!-- Buddy end -->
+
+            </LinearLayout> <!-- General section end -->
+
+            <!-- Conditions section -->
+            <TextView
+                android:id="@+id/conditionsSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"
+                android:text="Conditions" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:elevation="3dp"
+                android:background="#FFFFFF">
+
+                <!-- Visibility -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/diveSummaryEditVisibilityText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="0"
+                        android:layout_row="3"
+                        android:paddingBottom="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/black"
+                        android:text="Visibility: " />
+
+                    <EditText
+                        android:id="@+id/diveSummaryEditVisibilityValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:layout_row="3"
+                        android:inputType="numberSigned"
+                        android:paddingBottom="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/grey" />
+                </LinearLayout> <!-- Visibility end -->
+
+                <!-- Bottome temperature -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/diveSummaryEditBottomTemperatureText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="0"
+                        android:layout_row="3"
+                        android:paddingBottom="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/black"
+                        android:text="Bottom temperature: " />
+
+                    <EditText
+                        android:id="@+id/diveSummaryEditBottomTemperatureValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:layout_row="3"
+                        android:inputType="numberDecimal"
+                        android:paddingBottom="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/grey" />
+                </LinearLayout> <!-- Bottome temperature end -->
+
+            </LinearLayout> <!-- Conditions section end -->
+
+            <!-- Summary -->
+            <TextView
+                android:id="@+id/diveSummaryEditSummarySection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"
+                android:text="Summary" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:elevation="3dp"
+                android:background="#FFFFFF">
+
+                <!-- Duration -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/diveSummaryEditDurationText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="0"
+                        android:layout_row="3"
+                        android:paddingBottom="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/black"
+                        android:text="Duration: " />
+
+                    <EditText
+                        android:id="@+id/diveSummaryEditDurationValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:layout_row="3"
+                        android:paddingBottom="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/grey" />
+                </LinearLayout> <!-- Duration end -->
+
+                <!-- Max depth -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/diveSummaryEditMaxDepthText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="0"
+                        android:layout_row="3"
+                        android:paddingBottom="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/black"
+                        android:text="Max depth: " />
+
+                    <EditText
+                        android:id="@+id/diveSummaryEditMaxDepthValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:layout_row="3"
+                        android:inputType="numberDecimal"
+                        android:paddingBottom="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/grey" />
+                </LinearLayout> <!-- Max depth end -->
+
+                <!-- Time in -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/diveSummaryEditTimeInText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="0"
+                        android:layout_row="3"
+                        android:paddingBottom="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/black"
+                        android:text="Time in: " />
+
+                    <EditText
+                        android:id="@+id/diveSummaryEditTimeInValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:layout_row="3"
+                        android:paddingBottom="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/grey" />
+                </LinearLayout> <!-- Time in end -->
+
+                <!-- Time out -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/diveSummaryEditTimeOutText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="0"
+                        android:layout_row="3"
+                        android:paddingBottom="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/black"
+                        android:text="Time out: " />
+
+                    <EditText
+                        android:id="@+id/diveSummaryEditTimeOutValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:layout_row="3"
+                        android:paddingBottom="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/grey" />
+                </LinearLayout> <!-- Time out end -->
+
+            </LinearLayout> <!-- Summary section end -->
+
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 
 </android.support.design.widget.CoordinatorLayout>

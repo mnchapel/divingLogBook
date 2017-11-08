@@ -9,6 +9,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,12 +34,28 @@ public class DiveXmlDocument {
 
 
 
+    private boolean isFileExist(Context context,
+                                String filename) {
+        String path = context.getFilesDir().getAbsolutePath() + "/" + filename;
+        File file = new File(path);
+        return file.exists();
+    }
+
+
+
     /**
      * @brief Write dive to the internal storage.
      */
     public void writeDive(Context context,
                           Dive dive) throws IOException {
-        String diveFilename = dive.getTimeIn()+".xml";
+        Date startTimeFilename = dive.getStartTime().getTime();
+        SimpleDateFormat dateFormatFilename = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+        String diveFilename = dateFormatFilename.format(startTimeFilename)+".xml";
+
+        boolean res = isFileExist(context, diveFilename);
+        if(res)
+            return;
+
         FileOutputStream fos;
 
         String state = Environment.getExternalStorageState();
@@ -60,6 +77,9 @@ public class DiveXmlDocument {
         // BottomTemperature
         writeATag(xmlSerializer, "BottomTemperature", dive.getBottomTemperature()+"");
 
+        // Buddy
+        writeATag(xmlSerializer, "Buddy", dive.getBuddy());
+
         // DiveSamples
         xmlSerializer.startTag(null, "DiveSamples");
         List<DiveSample> diveSampleList = dive.getDiveSampleList();
@@ -73,11 +93,26 @@ public class DiveXmlDocument {
 
         // Duration
         writeATag(xmlSerializer, "Duration", dive.getDuration()+"");
+
+        // Instructor
+        writeATag(xmlSerializer, "Instructor", dive.getInstructor());
+
+        // Max Depth
         writeATag(xmlSerializer, "MaxDepth", dive.getMaxDepth()+"");
 
+        // Objective
+        writeATag(xmlSerializer, "Objective", dive.getObjective()+"");
+
+        // Site
+        writeATag(xmlSerializer, "Site", dive.getSite());
+
+        // Start time
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
         Date startTime = dive.getStartTime().getTime();
         writeATag(xmlSerializer, "StartTime", dateFormat.format(startTime));
+
+        // Town
+        writeATag(xmlSerializer, "Town", dive.getTownCountry());
 
 
         xmlSerializer.endTag(null, "Dive");
@@ -123,8 +158,6 @@ public class DiveXmlDocument {
             parser.nextTag();
             readDive(parser, dive);
 
-            dive.setObjective(context.getResources().getStringArray(R.array.objective_name)[0]);
-
             return dive;
         }
         finally {
@@ -151,7 +184,12 @@ public class DiveXmlDocument {
             if(name.equals("BottomTemperature")) {
                 float bottomTemperature = readFloat(parser);
                 dive.setBottomTemperature(bottomTemperature);
-                Log.i("readDive", bottomTemperature+"");
+                Log.d("readDive", bottomTemperature+"");
+                parser.next();
+            }
+            else if(name.equals("Buddy")) {
+                String buddy = readString(parser); // second to millisecond
+                dive.setBuddy(buddy);
                 parser.next();
             }
             else if(name.equals("DiveSamples")) {
@@ -164,9 +202,24 @@ public class DiveXmlDocument {
                 dive.setDuration(duration);
                 parser.next();
             }
+            else if(name.equals("Instructor")) {
+                String instructor = readString(parser); // second to millisecond
+                dive.setInstructor(instructor);
+                parser.next();
+            }
             else if(name.equals("MaxDepth")) {
                 float max_depth = readFloat(parser);
                 dive.setMaxDepth(max_depth);
+                parser.next();
+            }
+            else if(name.equals("Objective")) {
+                int objective = readInt(parser);
+                dive.setObjective(objective);
+                parser.next();
+            }
+            else if(name.equals("Site")) {
+                String site = readString(parser);
+                dive.setSite(site);
                 parser.next();
             }
             else if(name.equals("StartTime")) {
@@ -174,6 +227,11 @@ public class DiveXmlDocument {
                 Calendar startTime = Calendar.getInstance();
                 startTime.setTime(date);
                 dive.setDate(startTime);
+                parser.next();
+            }
+            else if(name.equals("Town")) {
+                String town = readString(parser);
+                dive.setTownCountry(town);
                 parser.next();
             }
             else {
@@ -240,7 +298,7 @@ public class DiveXmlDocument {
             }
             else if(name.equals("Time")) {
                 int time = readInt(parser);
-                Log.i("parser diveSample time", time+"");
+                Log.d("parser diveSample time", time+"");
                 diveSample.setTime(time);
                 parser.next();
             }
@@ -250,6 +308,30 @@ public class DiveXmlDocument {
         }
 
         return diveSample;
+    }
+
+
+
+    /**
+     * @brief Read date format.
+     * @param parser
+     * @return
+     * @throws IOException
+     * @throws XmlPullParserException
+     */
+    private Date readDate(XmlPullParser parser) throws IOException, XmlPullParserException {
+        if(parser.next() == XmlPullParser.TEXT) {
+            String date_str = parser.getText();
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+            try {
+                return format.parse(date_str);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return new Date();
+            }
+        }
+        else
+            return new Date();
     }
 
 
@@ -289,32 +371,25 @@ public class DiveXmlDocument {
 
 
     /**
-     * @brief Read date format.
-     * @param parser
+     * @brief Read String format.
+     * @param parser:
      * @return
      * @throws IOException
      * @throws XmlPullParserException
      */
-    private Date readDate(XmlPullParser parser) throws IOException, XmlPullParserException {
+    private String readString(XmlPullParser parser) throws IOException, XmlPullParserException {
         if(parser.next() == XmlPullParser.TEXT) {
-            String date_str = parser.getText();
-            DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-            try {
-                return format.parse(date_str);
-            } catch (ParseException e) {
-                e.printStackTrace();
-                return new Date();
-            }
+            String stringValue = parser.getText();
+            return stringValue;
         }
-        else
-            return new Date();
+        return "";
     }
 
 
 
     /**
      * @brief Skip XML tag.
-     * @param parser
+     * @param parser:
      * @throws IOException
      * @throws XmlPullParserException
      */

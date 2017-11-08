@@ -1,34 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#f1f1f1"
+    android:clickable="false"
+    android:descendantFocusability="blocksDescendants"
+    android:focusable="false"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:clickable="false"
-    android:focusable="false"
-    android:descendantFocusability="blocksDescendants">
+    android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/diveBookDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="Date"
-            android:textAllCaps="true"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+        android:orientation="vertical"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="20dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <!-- Site -->
+            <TextView
+                android:id="@+id/rowSiteValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Site"
+                android:textColor="@color/black"
+                android:textSize="18sp"/>
+
+            <!-- Date -->
+            <TextView
+                android:id="@+id/rowDateValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="Date"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:gravity="right" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="horizontal"
@@ -36,41 +55,45 @@
 
             <!-- duration icon -->
             <ImageView
-                android:id="@+id/imageViewDuration"
+                android:id="@+id/rowImageViewDuration"
                 android:layout_width="15dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_weight="1"
                 android:adjustViewBounds="true"
                 app:srcCompat="@drawable/duration_icon" />
 
             <!-- duration -->
             <TextView
-                android:id="@+id/diveBookDuration"
+                android:id="@+id/rowDurationValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_weight="1"
                 android:text="Duration" />
 
             <!-- max depth icon -->
             <ImageView
-                android:id="@+id/imageViewMaxDepth"
+                android:id="@+id/rowImageViewMaxDepth"
                 android:layout_width="15dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
-                android:layout_weight="1"
                 android:adjustViewBounds="true"
                 app:srcCompat="@drawable/max_depth_icon" />
 
             <!-- max depth text -->
             <TextView
-                android:id="@+id/diveBookDepthMax"
+                android:id="@+id/rowMaxDepthValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_weight="1"
                 android:text="Depth" />
+
+            <!-- Time in -->
+            <TextView
+                android:id="@+id/rowTimeIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="HH:mm"
+                android:gravity="right" />
 
         </LinearLayout>
 

@@ -38,8 +38,6 @@ public class SuuntoViperXmlParser extends ComputerModelXmlParser {
             parser.nextTag();
             readDive(parser, dive);
 
-            dive.setObjective(context.getResources().getStringArray(R.array.objective_name)[0]);
-
             return dive;
         }
         finally {
@@ -53,12 +51,12 @@ public class SuuntoViperXmlParser extends ComputerModelXmlParser {
         parser.require(XmlPullParser.START_TAG, ns, "Dive");
         while(parser.next() != XmlPullParser.END_TAG) {
             String name = parser.getName();
-            Log.i("parser", name);
+            Log.d("parser", name);
 
             if(name.equals("BottomTemperature")) {
                 int bottomTemperature = readInt(parser);
                 dive.setBottomTemperature(bottomTemperature);
-                Log.i("readDive", bottomTemperature+"");
+                Log.d("readDive", bottomTemperature+"");
                 parser.nextTag();
             }
             else if(name.equals("DiveSamples")) {
@@ -100,7 +98,7 @@ public class SuuntoViperXmlParser extends ComputerModelXmlParser {
         parser.require(XmlPullParser.START_TAG, ns, "DiveSamples");
         while(parser.next() != XmlPullParser.END_TAG) {
             String name = parser.getName();
-            Log.i("parser", name);
+            Log.d("parser", name);
 
             if (name.equals("Dive.Sample")) {
                 DiveSample diveSample = readOneDiveSample(parser);
@@ -121,7 +119,7 @@ public class SuuntoViperXmlParser extends ComputerModelXmlParser {
         parser.require(XmlPullParser.START_TAG, ns, "Dive.Sample");
         while(parser.next() != XmlPullParser.END_TAG) {
             String name = parser.getName();
-            Log.i("parser", name);
+            Log.d("parser", name);
 
             if (name.equals("Depth")) {
                 float depth = readFloat(parser);
@@ -166,7 +164,7 @@ public class SuuntoViperXmlParser extends ComputerModelXmlParser {
     private Date readDate(XmlPullParser parser) throws IOException, XmlPullParserException {
         if(parser.next() == XmlPullParser.TEXT) {
             String date_str = parser.getText();
-            Log.i("test", date_str);
+            Log.d("test", date_str);
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
             try {
                 return format.parse(date_str);

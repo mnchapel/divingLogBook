@@ -70,18 +70,28 @@ public class ListViewDivingAdapter extends BaseExpandableListAdapter {
         if(view == null)
             view = inflater.inflate(R.layout.row, parent, false);
 
-        // Date
-        TextView date = (TextView) view.findViewById(R.id.diveBookDate);
         Date startTime = diveList.get(groupPosition).get(childPosition).getStartTime().getTime();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE dd HH:mm");
+
+        // Site
+        TextView site = (TextView) view.findViewById(R.id.rowSiteValue);
+        site.setText(diveList.get(groupPosition).get(childPosition).getSite());
+
+        // Date
+        TextView date = (TextView) view.findViewById(R.id.rowDateValue);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         date.setText(dateFormat.format(startTime));
 
+        // Time in
+        TextView timeIn = (TextView) view.findViewById(R.id.rowTimeIn);
+        SimpleDateFormat timeInFormat = new SimpleDateFormat("HH:mm");
+        timeIn.setText(timeInFormat.format(startTime));
+
         // Duration
-        TextView duration = (TextView) view.findViewById(R.id.diveBookDuration);
+        TextView duration = (TextView) view.findViewById(R.id.rowDurationValue);
         duration.setText(DateUtils.formatElapsedTime(diveList.get(groupPosition).get(childPosition).getDuration()));
 
         // Max Depth
-        TextView maxDepth = (TextView) view.findViewById(R.id.diveBookDepthMax);
+        TextView maxDepth = (TextView) view.findViewById(R.id.rowMaxDepthValue);
         maxDepth.setText(Float.toString(diveList.get(groupPosition).get(childPosition).getMaxDepth()));
 
         return view;

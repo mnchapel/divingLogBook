@@ -38,7 +38,7 @@ public class DiveBookActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_dive_book, container, false);
 
-        HomeMenuActivity activity = (HomeMenuActivity) getActivity();
+        final HomeMenuActivity activity = (HomeMenuActivity) getActivity();
         diveList = activity.getDiveList();
 
         createGroups();
@@ -68,7 +68,7 @@ public class DiveBookActivity extends Fragment {
                                 .replace(R.id.content_frame, fragment)
                                 .commit();
 
-                        getActivity().setTitle("Dive #");
+                        getActivity().setTitle("Dive #" + (activity.getDiveSize() - getDiveId(groupPosition, childPosition)));
 
                         return false;
                     }

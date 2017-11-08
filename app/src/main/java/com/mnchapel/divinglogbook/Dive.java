@@ -5,6 +5,7 @@ import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -18,8 +19,8 @@ public class Dive implements Parcelable, Comparable<Dive> {
     //
     private float bottomTemperature;
 
-    // Date + Time in
-    private Calendar startTime;
+    //
+    private String buddy;
 
     //
     private List<DiveSample> diveSampleList;
@@ -28,34 +29,69 @@ public class Dive implements Parcelable, Comparable<Dive> {
     private int duration;
 
     //
-    private String objective;
+    private String instructor;
 
     //
     private float maxDepth;
 
     //
+    private int objective;
+
+    //
     private int sampleInterval;
+
+    //
+    private String site;
+
+    // Date + Time in
+    private Calendar startTime;
+
+    //
+    private String townCountry;
+
+    //
+    private int visibility;
 
 
 
     /**
      * @brief Default constructor
      */
-    public Dive() {}
+    public Dive() {
+        bottomTemperature = 0.f;
+        buddy = "";
+        diveSampleList = new ArrayList<>();
+        duration = 0;
+        instructor = "";
+        maxDepth = 0.f;
+        objective = 0;
+        sampleInterval = 0;
+        site = "";
+        startTime = Calendar.getInstance();
+        townCountry = "";
+        visibility = -1;
+    }
 
 
 
     /**
      * @brief Constructor
      *
-     * @param in
+     * @param in: the parcel.
      */
     protected Dive(Parcel in) {
         bottomTemperature = in.readFloat();
+        buddy = in.readString();
+        diveSampleList = in.createTypedArrayList(DiveSample.CREATOR);
         duration = in.readInt();
+        instructor = in.readString();
         maxDepth = in.readFloat();
+        objective = in.readInt();
         sampleInterval = in.readInt();
-        // TODO add calendar
+        site = in.readString();
+        startTime = (Calendar) in.readSerializable();
+        townCountry = in.readString();
+        visibility = in.readInt();
     }
 
 
@@ -104,11 +140,44 @@ public class Dive implements Parcelable, Comparable<Dive> {
     }
 
 
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null)
+            return false;
+        if(obj == this)
+            return false;
+        if(!(obj instanceof Dive))
+            return false;
+
+        Dive other = (Dive) obj;
+        boolean res;
+        if(!startTime.equals(other.getStartTime()))
+            res = false;
+        else
+            res = true;
+
+        return res;
+    }
+
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((startTime == null) ? 0 : startTime.hashCode());
+        return result;
+    }
+
+
 
     // GETTER---------------------------------------------------------------------------------------
 
     public float getBottomTemperature() {
         return bottomTemperature;
+    }
+
+    public String getBuddy() {
+        return buddy;
     }
 
     public String getDate() {
@@ -125,7 +194,13 @@ public class Dive implements Parcelable, Comparable<Dive> {
         return duration;
     }
 
-    public String getObjective() { return objective; }
+    public String getInstructor() {
+        return instructor;
+    }
+
+    public int getObjective() {
+        return objective;
+    }
 
     public String getTimeIn() {
         Date date = startTime.getTime();
@@ -149,8 +224,20 @@ public class Dive implements Parcelable, Comparable<Dive> {
         return sampleInterval;
     }
 
+    public String getSite() {
+        return site;
+    }
+
     public Calendar getStartTime() {
         return startTime;
+    }
+
+    public String getTownCountry() {
+        return townCountry;
+    }
+
+    public int getVisibility() {
+        return visibility;
     }
 
 
@@ -158,6 +245,10 @@ public class Dive implements Parcelable, Comparable<Dive> {
     // SETTER --------------------------------------------------------------------------------------
 
     public void setDate(Calendar startTime) { this.startTime = (Calendar) startTime.clone(); }
+
+    public void setBuddy(String buddy) {
+        this.buddy = buddy;
+    }
 
     public void setBottomTemperature(float bottomTemperature) {
         this.bottomTemperature = bottomTemperature;
@@ -171,29 +262,55 @@ public class Dive implements Parcelable, Comparable<Dive> {
         this.duration = duration;
     }
 
-    public void setObjective(String objective) { this.objective = objective; }
+    public void setInstructor(String instructor) {
+        this.instructor = instructor;
+    }
+
+    public void setObjective(int objective) {
+        this.objective = objective;
+    }
 
     public void setMaxDepth(float maxDepth) {
         this.maxDepth = maxDepth;
+    }
+
+    public void setSite(String site) {
+        this.site = site;
     }
 
     public void setSampleInterval(int sampleInterval) {
         this.sampleInterval = sampleInterval;
     }
 
+    public void setTownCountry(String townCountry) {
+        this.townCountry = townCountry;
+    }
+
+    public void setVisibility(int visibility) {
+        this.visibility = visibility;
+    }
+
+
 
     /**
-     * @brief
+     * @brief Write object to parcel.
      *
-     * @param parcel
+     * @param parcel: the parcel.
      * @param i
      */
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeFloat(bottomTemperature);
+        parcel.writeString(buddy);
+        parcel.writeTypedList(diveSampleList);
         parcel.writeInt(duration);
+        parcel.writeString(instructor);
         parcel.writeFloat(maxDepth);
+        parcel.writeInt(objective);
         parcel.writeInt(sampleInterval);
-        // TODO add calendar
+        parcel.writeString(site);
+        parcel.writeSerializable(startTime);
+        parcel.writeString(townCountry);
+        parcel.writeInt(visibility);
     }
 }

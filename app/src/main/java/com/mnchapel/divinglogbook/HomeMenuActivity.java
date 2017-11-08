@@ -28,13 +28,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
-import java.util.TreeMap;
 
 
 
@@ -134,14 +130,6 @@ public class HomeMenuActivity
             e.printStackTrace();
         } catch (XmlPullParserException e) {
             e.printStackTrace();
-        }
-
-        try {
-            copyDiveToInternalStorage();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }*/
 
         // Load all dive files
@@ -153,17 +141,6 @@ public class HomeMenuActivity
         } catch (XmlPullParserException e) {
             e.printStackTrace();
         }
-
-        /*AssetManager am = getAssets();
-        try {
-            InputStream is = am.open("dive_2001_04_09_0955.xml");
-            SuuntoViperXmlParser suunto = new SuuntoViperXmlParser();
-            suunto.parse(is);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (XmlPullParserException e) {
-            e.printStackTrace();
-        }*/
     }
 
 
@@ -292,11 +269,14 @@ public class HomeMenuActivity
         DiveXmlDocument diveXmlDocument = new DiveXmlDocument();
         File[] diveFileList = getFilesDir().listFiles();
 
+        int a = diveFileList.length;
         for(File diveFile: diveFileList) {
             InputStream is = new FileInputStream(diveFile);
 
             Dive dive = diveXmlDocument.readDive(this, is);
-            diveList.add(dive);
+            boolean res = diveList.contains(dive);
+            if(!res)
+                diveList.add(dive);
 
             is.close();
         }
@@ -389,6 +369,7 @@ public class HomeMenuActivity
     }
 
 
+
     /**
      * Getter
      * @return the list of all dives.
@@ -398,11 +379,38 @@ public class HomeMenuActivity
     }
 
 
+
     /**
-     * Getter
-     * @return one dive.
+     * @brief Getter
+     *
+     * @param divePosition:
+     *
+     * @return the dive at divePosition.
      */
     public Dive getDive(int divePosition) {
         return diveList.get(divePosition);
+    }
+
+
+
+    /**
+     * @brief Get the number of dives.
+     *
+     * @return the number of dives.
+     */
+    public int getDiveSize() {
+        return diveList.size();
+    }
+
+
+
+    /**
+     * @brief Setter
+     *
+     * @param divePosition: the position of the dive in the list.
+     * @param dive: the dive.
+     */
+    public Dive setDive(int divePosition, Dive dive) {
+        return diveList.set(divePosition, dive);
     }
 }

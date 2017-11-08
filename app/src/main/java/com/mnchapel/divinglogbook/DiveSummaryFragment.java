@@ -8,16 +8,42 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import static android.app.Activity.RESULT_OK;
 
 
 public class DiveSummaryFragment extends Fragment {
+
+    private Dive dive;
+
+    private int diveKey;
 
     /**
      * @brief Default constructor.
      */
     public DiveSummaryFragment(){
         // Required empty public constructor
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                dive = (Dive) data.getParcelableExtra("diveUpdated");
+
+                fillGeneralData(this.getView(), dive);
+                fillConditionsData(this.getView(), dive);
+                fillSummaryData(this.getView(), dive);
+
+                HomeMenuActivity activity = (HomeMenuActivity) getActivity();
+                activity.setDive(diveKey, dive);
+            }
+        }
     }
 
 
@@ -37,7 +63,9 @@ public class DiveSummaryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dive_summary, container, false);
 
-        final Dive dive = (Dive) getArguments().getParcelable("dive");
+        HomeMenuActivity activity = (HomeMenuActivity) getActivity();
+        diveKey = getArguments().getInt("diveKey");
+        dive = activity.getDive(diveKey);
 
         fillGeneralData(view, dive);
         fillConditionsData(view, dive);
@@ -51,7 +79,7 @@ public class DiveSummaryFragment extends Fragment {
             public void onClick(View view){
                 Intent intent = new Intent(getActivity(), DiveSummaryEditActivity.class);
                 intent.putExtra("dive", dive);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -88,14 +116,32 @@ public class DiveSummaryFragment extends Fragment {
         date.setText(dive.getDate());
 
         // Site
+        TextView site = (TextView) view.findViewById(R.id.diveSummarySiteValue);
+        site.setText(dive.getSite());
 
         // Town/Country
+        TextView townCountry = (TextView) view.findViewById(R.id.diveSummaryTownCountryValue);
+        townCountry.setText(dive.getTownCountry());
 
         // Objective
         TextView objective = (TextView) view.findViewById(R.id.diveSummaryObjectiveValue);
-        objective.setText(dive.getObjective());
+        String objectiveValue = getResources().getStringArray(R.array.objective_name)[dive.getObjective()];
+        objective.setText(objectiveValue);
 
         // Buddy
+        TextView buddy = (TextView) view.findViewById(R.id.diveSummaryBuddyValue);
+        buddy.setText(dive.getBuddy());
+
+        // Instructor
+        ImageView instructorText = (ImageView) view.findViewById(R.id.diveSummaryInstructorIcon);
+        TextView instructorValue = (TextView) view.findViewById(R.id.diveSummaryInstructorValue);
+        if(dive.getObjective() == 0) // Exploration
+        {
+            instructorText.setVisibility(View.GONE);
+            instructorValue.setVisibility(View.GONE);
+        }
+        else // Technical
+            instructorValue.setText(dive.getInstructor());
     }
 
 

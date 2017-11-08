@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 public class DiveActivity extends Fragment {
 
     // The dive to show
-    private Dive dive;
+    private int diveKey;
 
     private TabLayout tab_layout;
     private ViewPager view_pager;
@@ -23,14 +23,13 @@ public class DiveActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_dive, container, false);
 
-        HomeMenuActivity activity = (HomeMenuActivity) getActivity();
-        int diveKey = getArguments().getInt("diveKey");
-        dive = activity.getDive(diveKey);
+        diveKey = getArguments().getInt("diveKey");
 
         tab_layout = (TabLayout) view.findViewById(R.id.tab_layout);
         tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.summary_tab_icon));
         tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.chart_tab_icon));
         tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.equipment_tab_icon));
+        tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.bio_tab_icon));
         tab_layout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         view_pager = (ViewPager) view.findViewById(R.id.pager);
@@ -46,7 +45,7 @@ public class DiveActivity extends Fragment {
      */
     private void setupViewPager(ViewPager viewPager) {
         Bundle args = new Bundle();
-        args.putParcelable("dive", dive);
+        args.putInt("diveKey", diveKey);
 
         DiveFragmentPager adapter = new DiveFragmentPager(getChildFragmentManager(), tab_layout.getTabCount(), args);
         viewPager.setAdapter(adapter);

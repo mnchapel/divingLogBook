@@ -36,7 +36,10 @@ public class DiveChartFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_dive_chart, container, false);
 
-        Dive dive = (Dive) getArguments().getParcelable("dive");
+
+        HomeMenuActivity activity = (HomeMenuActivity) getActivity();
+        int diveKey = getArguments().getInt("diveKey");
+        Dive dive = activity.getDive(diveKey);
         List<DiveSample> diveSampleList = dive.getDiveSampleList();
 
         // initialize our XYPlot reference:
