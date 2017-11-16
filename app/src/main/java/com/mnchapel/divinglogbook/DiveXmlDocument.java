@@ -44,17 +44,13 @@ public class DiveXmlDocument {
 
 
     /**
-     * @brief Write dive to the internal storage.
+     * Write dive to the internal storage.
      */
     public void writeDive(Context context,
                           Dive dive) throws IOException {
         Date startTimeFilename = dive.getStartTime().getTime();
         SimpleDateFormat dateFormatFilename = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
         String diveFilename = dateFormatFilename.format(startTimeFilename)+".xml";
-
-        boolean res = isFileExist(context, diveFilename);
-        if(res)
-            return;
 
         FileOutputStream fos;
 
@@ -75,33 +71,49 @@ public class DiveXmlDocument {
         xmlSerializer.startTag(null, "Dive");
 
         // BottomTemperature
-        writeATag(xmlSerializer, "BottomTemperature", dive.getBottomTemperature()+"");
+        writeATag(xmlSerializer, "BottomTemperature", String.valueOf(dive.getBottomTemperature()));
 
         // Buddy
-        writeATag(xmlSerializer, "Buddy", dive.getBuddy());
+        xmlSerializer.startTag(null, "Buddies");
+        List<String> buddies = dive.getBuddy();
+        for(String buddy: buddies) {
+            writeATag(xmlSerializer, "Buddy", buddy);
+        }
+        xmlSerializer.endTag(null, "Buddies");
+
+        // Decompressions
+        xmlSerializer.startTag(null, "Decompressions");
+        List<Decompression> decompressionList = dive.getDecompressionList();
+        for(Decompression decompression: decompressionList) {
+            xmlSerializer.startTag(null, "Decompression");
+            writeATag(xmlSerializer, "Meters", String.valueOf(decompression.getMeter()));
+            writeATag(xmlSerializer, "Minutes", String.valueOf(decompression.getMinute()));
+            xmlSerializer.endTag(null, "Decompression");
+        }
+        xmlSerializer.endTag(null, "Decompressions");
 
         // DiveSamples
         xmlSerializer.startTag(null, "DiveSamples");
         List<DiveSample> diveSampleList = dive.getDiveSampleList();
         for(DiveSample diveSample: diveSampleList) {
             xmlSerializer.startTag(null, "Dive.Sample");
-            writeATag(xmlSerializer, "Depth", diveSample.getDepth()+"");
-            writeATag(xmlSerializer, "Time", diveSample.getTime()+"");
+            writeATag(xmlSerializer, "Depth", String.valueOf(diveSample.getDepth()));
+            writeATag(xmlSerializer, "Time", String.valueOf(diveSample.getTime()));
             xmlSerializer.endTag(null, "Dive.Sample");
         }
         xmlSerializer.endTag(null, "DiveSamples");
 
         // Duration
-        writeATag(xmlSerializer, "Duration", dive.getDuration()+"");
+        writeATag(xmlSerializer, "Duration", String.valueOf(dive.getDuration()));
 
         // Instructor
         writeATag(xmlSerializer, "Instructor", dive.getInstructor());
 
         // Max Depth
-        writeATag(xmlSerializer, "MaxDepth", dive.getMaxDepth()+"");
+        writeATag(xmlSerializer, "MaxDepth", String.valueOf(dive.getMaxDepth()));
 
         // Objective
-        writeATag(xmlSerializer, "Objective", dive.getObjective()+"");
+        writeATag(xmlSerializer, "Objective", String.valueOf(dive.getObjective()));
 
         // Site
         writeATag(xmlSerializer, "Site", dive.getSite());
@@ -112,7 +124,10 @@ public class DiveXmlDocument {
         writeATag(xmlSerializer, "StartTime", dateFormat.format(startTime));
 
         // Town
-        writeATag(xmlSerializer, "Town", dive.getTownCountry());
+        writeATag(xmlSerializer, "Town", dive.getTown());
+
+        // Visibility
+        writeATag(xmlSerializer, "Visibility", String.valueOf(dive.getVisibility()));
 
 
         xmlSerializer.endTag(null, "Dive");
@@ -146,7 +161,7 @@ public class DiveXmlDocument {
 
 
     /**
-     * @brief Read dive from the internal storage.
+     * Read dive from the internal storage.
      */
     public Dive readDive(Context context,
                          InputStream is) throws XmlPullParserException, IOException {
@@ -167,11 +182,12 @@ public class DiveXmlDocument {
 
 
     /**
-     * @brief
-     * @param parser
-     * @param dive
-     * @throws XmlPullParserException
-     * @throws IOException
+     * Read a xml file dive.
+     *
+     * @param parser:
+     * @param dive:
+     * @throws XmlPullParserException:
+     * @throws IOException:
      */
     private void readDive(XmlPullParser parser, Dive dive) throws XmlPullParserException, IOException {
         parser.require(XmlPullParser.START_TAG, ns, "Dive");
@@ -184,12 +200,22 @@ public class DiveXmlDocument {
             if(name.equals("BottomTemperature")) {
                 float bottomTemperature = readFloat(parser);
                 dive.setBottomTemperature(bottomTemperature);
-                Log.d("readDive", bottomTemperature+"");
+                Log.d("readDive", String.valueOf(bottomTemperature));
                 parser.next();
             }
-            else if(name.equals("Buddy")) {
-                String buddy = readString(parser); // second to millisecond
-                dive.setBuddy(buddy);
+            else if(name.equals("Buddies")) {
+                List<String> buddyList = readBuddy(parser);
+                dive.setBuddy(buddyList);
+                parser.next();
+            }
+            else if(name.equals("Country")) {
+                String country = readString(parser);
+                dive.setCountry(country);
+                parser.next();
+            }
+            else if(name.equals("Decompressions")) {
+                List<Decompression> decompressionList = readDecompression(parser);
+                dive.setDecompressionList(decompressionList);
                 parser.next();
             }
             else if(name.equals("DiveSamples")) {
@@ -198,12 +224,12 @@ public class DiveXmlDocument {
                 parser.next();
             }
             else if(name.equals("Duration")) {
-                int duration = readInt(parser); // second to millisecond
+                int duration = readInt(parser);
                 dive.setDuration(duration);
                 parser.next();
             }
             else if(name.equals("Instructor")) {
-                String instructor = readString(parser); // second to millisecond
+                String instructor = readString(parser);
                 dive.setInstructor(instructor);
                 parser.next();
             }
@@ -231,7 +257,12 @@ public class DiveXmlDocument {
             }
             else if(name.equals("Town")) {
                 String town = readString(parser);
-                dive.setTownCountry(town);
+                dive.setTown(town);
+                parser.next();
+            }
+            else if(name.equals("Visibility")) {
+                Float visibility = readFloat(parser);
+                dive.setVisibility(visibility);
                 parser.next();
             }
             else {
@@ -243,11 +274,78 @@ public class DiveXmlDocument {
 
 
     /**
-     * @brief Read dive samples.
-     * @param parser
-     * @return
-     * @throws IOException
-     * @throws XmlPullParserException
+     * Read buddies.
+     *
+     * @param parser:
+     * @return buddies.
+     * @throws IOException:
+     * @throws XmlPullParserException:
+     */
+    private List<String> readBuddy(XmlPullParser parser) throws IOException, XmlPullParserException {
+        List<String> buddyList = new ArrayList<>();
+
+        parser.require(XmlPullParser.START_TAG, ns, "Buddies");
+        while(parser.next() != XmlPullParser.END_TAG) {
+            if (parser.getEventType() != XmlPullParser.START_TAG)
+                continue;
+
+            String name = parser.getName();
+
+            if (name.equals("Buddy")) {
+                String buddy = readString(parser);
+                buddyList.add(buddy);
+                parser.next();
+            }
+            else {
+                skip(parser);
+            }
+        }
+
+        return buddyList;
+    }
+
+
+
+    /**
+     * Read decompressions.
+     *
+     * @param parser:
+     * @return decompressions.
+     * @throws IOException:
+     * @throws XmlPullParserException:
+     */
+    private List<Decompression> readDecompression(XmlPullParser parser) throws IOException, XmlPullParserException {
+        List<Decompression> decompressionList = new ArrayList<>();
+
+        parser.require(XmlPullParser.START_TAG, ns, "Decompressions");
+        while(parser.next() != XmlPullParser.END_TAG) {
+            if (parser.getEventType() != XmlPullParser.START_TAG)
+                continue;
+
+            String name = parser.getName();
+
+            if (name.equals("Decompression")) {
+                Decompression decompression = readOneDecompression(parser);
+                decompressionList.add(decompression);
+                parser.next();
+            }
+            else {
+                skip(parser);
+            }
+        }
+
+        return decompressionList;
+    }
+
+
+
+    /**
+     * Read dive samples.
+     *
+     * @param parser:
+     * @return dive samples.
+     * @throws IOException:
+     * @throws XmlPullParserException:
      */
     private List<DiveSample> readDiveSample(XmlPullParser parser) throws IOException, XmlPullParserException {
         List<DiveSample> diveSampleList = new ArrayList<DiveSample>();
@@ -275,11 +373,50 @@ public class DiveXmlDocument {
 
 
     /**
-     * @brief Read one dive sample.
-     * @param parser
-     * @return
-     * @throws IOException
-     * @throws XmlPullParserException
+     * Read one decompression.
+     *
+     * @param parser:
+     * @return a decompression.
+     * @throws IOException:
+     * @throws XmlPullParserException:
+     */
+    private Decompression readOneDecompression(XmlPullParser parser) throws IOException, XmlPullParserException {
+        Decompression decompression = new Decompression();
+
+        parser.require(XmlPullParser.START_TAG, ns, "Decompression");
+        while(parser.next() != XmlPullParser.END_TAG) {
+            if (parser.getEventType() != XmlPullParser.START_TAG)
+                continue;
+
+            String name = parser.getName();
+
+            if (name.equals("Meters")) {
+                int meters = readInt(parser);
+                decompression.setMeter(meters);
+                parser.next();
+            }
+            else if(name.equals("Minutes")) {
+                int minutes = readInt(parser);
+                decompression.setMinute(minutes);
+                parser.next();
+            }
+            else {
+                skip(parser);
+            }
+        }
+
+        return decompression;
+    }
+
+
+
+    /**
+     * Read one dive sample.
+     *
+     * @param parser:
+     * @return a dive sample.
+     * @throws IOException:
+     * @throws XmlPullParserException:
      */
     private DiveSample readOneDiveSample(XmlPullParser parser) throws IOException, XmlPullParserException {
         DiveSample diveSample = new DiveSample();
@@ -298,7 +435,7 @@ public class DiveXmlDocument {
             }
             else if(name.equals("Time")) {
                 int time = readInt(parser);
-                Log.d("parser diveSample time", time+"");
+                Log.d("parser diveSample time", String.valueOf(time));
                 diveSample.setTime(time);
                 parser.next();
             }
@@ -313,11 +450,12 @@ public class DiveXmlDocument {
 
 
     /**
-     * @brief Read date format.
-     * @param parser
-     * @return
-     * @throws IOException
-     * @throws XmlPullParserException
+     * Read date format.
+     *
+     * @param parser:
+     * @return a date.
+     * @throws IOException:
+     * @throws XmlPullParserException:
      */
     private Date readDate(XmlPullParser parser) throws IOException, XmlPullParserException {
         if(parser.next() == XmlPullParser.TEXT) {
@@ -337,11 +475,12 @@ public class DiveXmlDocument {
 
 
     /**
-     * @brief Read float format.
-     * @param parser
-     * @return
-     * @throws IOException
-     * @throws XmlPullParserException
+     * Read float format.
+     *
+     * @param parser:
+     * @return a float.
+     * @throws IOException:
+     * @throws XmlPullParserException:
      */
     private float readFloat(XmlPullParser parser) throws IOException, XmlPullParserException {
         if(parser.next() == XmlPullParser.TEXT) {
@@ -354,11 +493,12 @@ public class DiveXmlDocument {
 
 
     /**
-     * @brief Read int format.
-     * @param parser
-     * @return
-     * @throws IOException
-     * @throws XmlPullParserException
+     * Read int format.
+     *
+     * @param parser:
+     * @return an integer.
+     * @throws IOException:
+     * @throws XmlPullParserException:
      */
     private int readInt(XmlPullParser parser) throws IOException, XmlPullParserException {
         if(parser.next() == XmlPullParser.TEXT) {
@@ -371,27 +511,27 @@ public class DiveXmlDocument {
 
 
     /**
-     * @brief Read String format.
+     * Read String format.
+     *
      * @param parser:
-     * @return
-     * @throws IOException
-     * @throws XmlPullParserException
+     * @return a string.
+     * @throws IOException:
+     * @throws XmlPullParserException:
      */
     private String readString(XmlPullParser parser) throws IOException, XmlPullParserException {
-        if(parser.next() == XmlPullParser.TEXT) {
-            String stringValue = parser.getText();
-            return stringValue;
-        }
+        if(parser.next() == XmlPullParser.TEXT)
+            return parser.getText();
         return "";
     }
 
 
 
     /**
-     * @brief Skip XML tag.
+     * Skip XML tag.
+     *
      * @param parser:
-     * @throws IOException
-     * @throws XmlPullParserException
+     * @throws IOException:
+     * @throws XmlPullParserException:
      */
     private void skip(XmlPullParser parser) throws IOException, XmlPullParserException {
         if (parser.getEventType() != XmlPullParser.START_TAG) {

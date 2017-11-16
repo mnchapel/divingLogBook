@@ -6,31 +6,33 @@
     android:background="#f1f1f1"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ScrollView
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <!-- Chart section -->
-        <TextView
-            android:id="@+id/generalSection"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:text="Chart" />
+        android:layout_width="match_parent" >
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:background="#FFFFFF"
             android:layout_height="wrap_content"
+            android:layout_width="match_parent"
             android:orientation="vertical"
-            android:padding="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:elevation="3dp"
-            android:background="#FFFFFF">
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp">
+
+
+            <LinearLayout
+                android:background="#FFFFFF"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:orientation="vertical">
+
+                <com.mnchapel.divinglogbook.LineGraph
+                    android:id="@+id/diveChartLineGraph"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
 
             <!-- Chart -->
             <com.androidplot.xy.XYPlot
@@ -56,11 +58,6 @@
                 ap:marginRight="0dp"
                 ap:lineLabelAlignTop="center"
                 ap:lineLabelInsetTop="-1dp"/>
-
-            <SeekBar
-                android:id="@+id/seekBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
 
             <!-- Time text -->
             <TextView
@@ -103,6 +100,6 @@
                 android:textColor="@color/black" />
 
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

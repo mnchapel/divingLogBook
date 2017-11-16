@@ -1,24 +1,26 @@
 package com.mnchapel.divinglogbook;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.TreeMap;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.AdapterView;
 import android.widget.ExpandableListView;
-import android.widget.ListView;
-
 
 
 public class DiveBookActivity extends Fragment {
@@ -37,6 +39,7 @@ public class DiveBookActivity extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_dive_book, container, false);
+        setHasOptionsMenu(true);
 
         final HomeMenuActivity activity = (HomeMenuActivity) getActivity();
         diveList = activity.getDiveList();
@@ -76,6 +79,35 @@ public class DiveBookActivity extends Fragment {
         );
 
         return view;
+    }
+
+
+
+    /**
+     * @param menu :
+     * @return boolean
+     */
+    @Override
+    public void onCreateOptionsMenu(Menu menu,
+                                    MenuInflater inflater) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        inflater.inflate(R.menu.add_dive_menu, menu);
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.addMenuItem:
+                Dive dive = new Dive();
+                Intent intent = new Intent(getActivity(), DiveSummaryEditActivity.class);
+                intent.putExtra("dive", dive);
+                startActivityForResult(intent, 1);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 

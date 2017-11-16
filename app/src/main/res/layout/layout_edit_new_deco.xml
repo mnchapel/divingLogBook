@@ -1,0 +1,57 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:contentDescription="@string/ic_thermometer"
+        android:id="@+id/diveSummaryEditDecoIcon"
+        android:labelFor="@+id/diveSummaryEditDecoMetersValue"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_width="wrap_content"
+        android:src="@drawable/ic_deco" />
+
+    <EditText
+        android:hint="@string/dive_summary_hint_deco_meters"
+        android:id="@+id/diveSummaryEditDecoMetersValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_weight="1"
+        android:inputType="numberSigned"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/diveSummaryEditDecoMeters"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_width="wrap_content"
+        android:text="m"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black" />
+
+    <EditText
+        android:hint="@string/dive_summary_hint_deco_minutes"
+        android:id="@+id/diveSummaryEditDecoDurationValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_weight="1"
+        android:inputType="numberSigned"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black"
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:id="@+id/diveSummaryEditDecoDuration"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_width="wrap_content"
+        android:text="'"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black" />
+</LinearLayout>

@@ -42,6 +42,9 @@ public class DiveChartFragment extends Fragment {
         Dive dive = activity.getDive(diveKey);
         List<DiveSample> diveSampleList = dive.getDiveSampleList();
 
+        LineGraph lineGraph = (LineGraph) view.findViewById(R.id.diveChartLineGraph);
+        lineGraph.setDiveSample(diveSampleList);
+
         // initialize our XYPlot reference:
         XYPlot plot = (XYPlot) view.findViewById(R.id.plot);
 

@@ -1,245 +1,301 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#f1f1f1"
+    xmlns:tools="http://schemas.android.com/tools"
     android:fillViewport="true"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
     android:outlineProvider="bounds"
     tools:context="com.mnchapel.divinglogbook.DiveEquipmentFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ScrollView
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <!-- Tank -->
-        <TextView
-            android:id="@+id/tankSection"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:text="Tank" />
+        android:layout_width="match_parent" >
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:background="#FFFFFF"
             android:layout_height="wrap_content"
+            android:layout_width="match_parent"
             android:orientation="vertical"
-            android:padding="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:elevation="3dp"
-            android:background="#FFFFFF">
+            android:paddingBottom="20dp">
 
-            <!-- Type -->
+
+
+            <!-- *******************
+                     Tank section
+                ******************** -->
             <LinearLayout
-                android:layout_width="match_parent"
+                android:background="#FFFFFF"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_width="match_parent"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tankTypeText"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/diveEquipmentTankSection"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                    android:textColor="@color/black"
-                    android:text="Type: " />
+                    android:layout_marginBottom="25dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:text="Tank"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                    android:textColor="@color/black" />
 
-                <TextView
-                    android:id="@+id/tankTypeValue"
-                    android:layout_width="wrap_content"
+                <!-- Type -->
+                <RelativeLayout
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                    android:textColor="@color/grey" />
-            </LinearLayout>
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent">
 
-            <!-- Litres -->
+                    <ImageView
+                        android:contentDescription="@string/ic_calendar"
+                        android:id="@+id/diveEquipementTankTypeIcon"
+                        android:layout_centerVertical="true"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_width="wrap_content"
+                        android:src="@drawable/ic_calendar" />
+
+                    <TextView
+                        android:id="@+id/diveEquipmentTankTypeValue"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_toEndOf="@id/diveEquipementTankTypeIcon"
+                        android:layout_width="wrap_content"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/black" />
+                </RelativeLayout>
+
+                <!-- Litres -->
+                <RelativeLayout
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent">
+
+                    <ImageView
+                        android:contentDescription="@string/ic_calendar"
+                        android:id="@+id/diveEquipementTankLitresIcon"
+                        android:layout_centerVertical="true"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_width="wrap_content"
+                        android:src="@drawable/ic_calendar" />
+
+                    <TextView
+                        android:id="@+id/diveEquipmentTankLitresValue"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_toEndOf="@id/diveEquipementTankLitresIcon"
+                        android:layout_width="wrap_content"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/black" />
+                </RelativeLayout>
+
+                <!-- Mixture -->
+                <RelativeLayout
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent">
+
+                    <ImageView
+                        android:contentDescription="@string/ic_calendar"
+                        android:id="@+id/diveEquipementTankMixtureIcon"
+                        android:layout_centerVertical="true"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_width="wrap_content"
+                        android:src="@drawable/ic_calendar" />
+
+
+                    <TextView
+                        android:id="@+id/diveEquipmentTankMixtureValue"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_toEndOf="@id/diveEquipementTankMixtureIcon"
+                        android:layout_width="wrap_content"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/black" />
+                </RelativeLayout>
+
+            </LinearLayout> <!-- Tank section end -->
+
+
+
+            <!-- *******************
+                       Divider
+                ******************** -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#d7d7d7"/>
+
+
+
+            <!-- *******************
+                     Suit section
+                ******************** -->
             <LinearLayout
-                android:layout_width="match_parent"
+                android:background="#FFFFFF"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_width="match_parent"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:orientation="vertical">
 
+                <!-- Suit -->
                 <TextView
-                    android:id="@+id/tankLitresText"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/diveEquipmentSuitSection"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:text="Suit"
                     android:textColor="@color/black"
-                    android:text="Litres: " />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                    android:layout_marginBottom="25dp" />
 
-                <TextView
-                    android:id="@+id/tankLitresValue"
-                    android:layout_width="wrap_content"
+                <!-- Type -->
+                <RelativeLayout
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                    android:textColor="@color/grey" />
-            </LinearLayout>
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent">
 
-            <!-- Mixture -->
+                    <ImageView
+                        android:contentDescription="@string/ic_visibility"
+                        android:id="@+id/diveEquipmentSuitTypeIcon"
+                        android:layout_centerVertical="true"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_width="wrap_content"
+                        android:src="@drawable/ic_visibility" />
+
+                    <TextView
+                        android:id="@+id/diveEquipmentSuitTypeValue"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_toEndOf="@id/diveEquipmentSuitTypeIcon"
+                        android:layout_width="wrap_content"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/black" />
+                </RelativeLayout>
+
+                <!-- Thickness -->
+                <RelativeLayout
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent">
+
+                    <ImageView
+                        android:contentDescription="@string/ic_visibility"
+                        android:id="@+id/diveEquipmentSuitThicknessIcon"
+                        android:layout_centerVertical="true"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_width="wrap_content"
+                        android:src="@drawable/ic_visibility" />
+
+                    <TextView
+                        android:id="@+id/diveEquipmentSuitThicknessValue"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_toEndOf="@id/diveEquipmentSuitThicknessIcon"
+                        android:layout_width="wrap_content"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/black" />
+                </RelativeLayout>
+
+            </LinearLayout> <!-- Suit section end -->
+
+
+
+            <!-- *******************
+                       Divider
+                ******************** -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#d7d7d7"/>
+
+
+
+            <!-- *******************
+                  Other section
+                ******************** -->
             <LinearLayout
-                android:layout_width="match_parent"
+                android:background="#FFFFFF"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tankMixtureText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                    android:textColor="@color/black"
-                    android:text="Mixture: " />
-
-                <TextView
-                    android:id="@+id/tankMixtureValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                    android:textColor="@color/grey" />
-            </LinearLayout>
-
-        </LinearLayout> <!-- Tank end -->
-
-        <!-- Suit -->
-        <TextView
-            android:id="@+id/suitSection"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:text="Suit" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:elevation="3dp"
-            android:background="#FFFFFF">
-
-            <!-- Type -->
-            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/suitTypeText"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/weightSection"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:layout_marginBottom="25dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:text="Weight"
                     android:textColor="@color/black"
-                    android:text="Type: " />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
-                <TextView
-                    android:id="@+id/suitTypeValue"
-                    android:layout_width="wrap_content"
+                <!-- Weight -->
+                <RelativeLayout
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                    android:textColor="@color/grey" />
-            </LinearLayout>
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent">
 
-            <!-- Thickness -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                    <ImageView
+                        android:contentDescription="@string/ic_visibility"
+                        android:id="@+id/diveEquipmentOtherWeightIcon"
+                        android:layout_centerVertical="true"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_width="wrap_content"
+                        android:src="@drawable/ic_visibility" />
 
-                <TextView
-                    android:id="@+id/suitThicknessText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                    android:textColor="@color/black"
-                    android:text="Thickness: " />
+                    <TextView
+                        android:id="@+id/diveEquipmentOtherWeightValue"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_toEndOf="@id/diveEquipmentOtherWeightIcon"
+                        android:layout_width="wrap_content"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/black" />
+                </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/suitThicknessValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                    android:textColor="@color/grey" />
-            </LinearLayout>
+            </LinearLayout> <!-- Other end -->
 
-        </LinearLayout> <!-- Suit end -->
-
-
-
-        <!-- Weight -->
-        <TextView
-            android:id="@+id/weightSection"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:text="Weight" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:elevation="3dp"
-            android:background="#FFFFFF">
-
-            <!-- Weight -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/weightText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                    android:textColor="@color/black"
-                    android:text="Weight: " />
-
-                <TextView
-                    android:id="@+id/weightValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                    android:textColor="@color/grey" />
-            </LinearLayout>
-
-        </LinearLayout> <!-- Suit end -->
-
-    </LinearLayout>
-
-
+        </LinearLayout>
+    </ScrollView>
 
     <!-- Edit button -->
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/diveSummaryFab"
+        android:id="@+id/diveEquipmentFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:backgroundTint="@color/blue"
         app:srcCompat="@android:drawable/ic_menu_edit" />
+
 
 </FrameLayout>
