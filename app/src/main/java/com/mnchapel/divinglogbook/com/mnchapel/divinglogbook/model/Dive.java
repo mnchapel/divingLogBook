@@ -3,6 +3,7 @@ package com.mnchapel.divinglogbook.com.mnchapel.divinglogbook.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
+import android.util.Pair;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

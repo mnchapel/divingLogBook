@@ -1,7 +1,5 @@
 package com.mnchapel.divinglogbook;
 
-
-
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;

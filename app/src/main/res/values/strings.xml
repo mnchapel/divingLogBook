@@ -28,9 +28,7 @@
         <item>F</item>
     </string-array>
 
-
     <string name="comma">,</string>
-
 
     <!-- Dive Summary -->
     <string name="dive_summary_general_section_title">General</string>
@@ -91,6 +89,7 @@
     <string name="ic_decompression">Decompression icon</string>
     <string name="title_activity_dive_equipement_edit">DiveEquipementEditActivity</string>
     <string name="title_activity_dive_equipment_tank_edit">DiveEquipmentTankEditActivity</string>
+
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.

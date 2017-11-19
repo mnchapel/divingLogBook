@@ -35,7 +35,6 @@ public class LineGraph extends View {
         super(context, attributeSet);
 
         background = new Path();
-
         paint = new Paint();
         paint.setColor(Color.BLACK);
         paint.setStrokeWidth(5);

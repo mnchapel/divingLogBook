@@ -227,6 +227,7 @@
                 android:background="#d7d7d7"/>
 
 
+
             <!-- *******************
                   Conditions section
                 ******************** -->
@@ -330,7 +331,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#d7d7d7"/>
-
 
 
 

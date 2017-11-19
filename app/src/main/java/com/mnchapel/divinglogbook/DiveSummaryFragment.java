@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.mnchapel.divinglogbook.com.mnchapel.divinglogbook.model.Decompression;
 import com.mnchapel.divinglogbook.com.mnchapel.divinglogbook.model.Dive;
-
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
