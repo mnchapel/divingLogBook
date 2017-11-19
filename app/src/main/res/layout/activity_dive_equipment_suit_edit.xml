@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#f1f1f1"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mnchapel.divinglogbook.DiveSummaryEditActivity">
+
+    <LinearLayout
+        android:background="#FFFFFF"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp">
+
+
+
+        <!-- Tank -->
+        <Spinner
+            android:entries="@array/equipment_suit_type"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textColor="@color/black" />
+
+        <FrameLayout
+            android:background="#FFFFFF"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+            <ImageView
+                android:adjustViewBounds="true"
+                android:id="@+id/diveEquipmentEditTankTouchZone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitCenter"
+                android:src="@drawable/tank_background_zone"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:adjustViewBounds="true"
+                android:id="@+id/diveEquipmentEditImageBackground"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitCenter"
+                android:src="@drawable/equipment_suit_background" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </RelativeLayout>
+
+        </FrameLayout>
+
+        <!-- *******************
+                   Divider
+            ******************** -->
+
+        <!-- Suit -->
+
+    </LinearLayout>
+
+</FrameLayout>

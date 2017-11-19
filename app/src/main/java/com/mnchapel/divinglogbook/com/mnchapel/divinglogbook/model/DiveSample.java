@@ -1,4 +1,4 @@
-package com.mnchapel.divinglogbook;
+package com.mnchapel.divinglogbook.com.mnchapel.divinglogbook.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

@@ -11,6 +11,7 @@
         android:normalScreens="true"
         android:smallScreens="true" />
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -28,10 +29,15 @@
         </activity>
         <activity android:name=".BaseDriveActivity" />
         <activity
-        android:name=".DiveSummaryEditActivity"
-        android:label="@string/title_activity_dive_summary_edit">
-        </activity>
+            android:name=".DiveSummaryEditActivity"
+            android:label="@string/title_activity_dive_summary_edit" />
+        <activity
+            android:name=".com.mnchapel.divinglogbook.equipment.DiveEquipmentEditActivity"
+            android:label="@string/title_activity_dive_equipement_edit" />
+        <activity
+            android:name=".com.mnchapel.divinglogbook.equipment.DiveEquipmentTankEditActivity"
+            android:label="@string/title_activity_dive_equipment_tank_edit"></activity>
+        <activity android:name=".com.mnchapel.divinglogbook.equipment.DiveEquipmentSuitEditActivity"></activity>
     </application>
-
 
 </manifest>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mnchapel.divinglogbook.DiveSummaryEditActivity">
+
+    <LinearLayout
+        android:background="@drawable/background_gradient"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp">
+
+        <!-- Tank -->
+        <Spinner
+            android:entries="@array/equipment_tank_type"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="200sp"
+            android:textColor="@color/white" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="80dp"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:paddingTop="80dp">
+
+            <ImageView
+                android:id="@+id/diveEquipmentEditTankTouchZone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/tank_background_zone"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:adjustViewBounds="true"
+                android:id="@+id/diveEquipmentEditImageBackground"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingEnd="0dp"
+                android:paddingStart="50dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/tank_background" />
+
+
+            <!-- Start pressure -->
+            <RelativeLayout
+                android:id="@+id/diveEquipmentTankEditStartPressure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/diveEquipmentTankEditStartPressureValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:text="200"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:id="@+id/diveEquipmentTankEditStartPressureUnitValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/diveEquipmentTankEditStartPressureValue"
+                    android:layout_alignBaseline="@id/diveEquipmentTankEditStartPressureValue"
+                    android:text="bar"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                    android:textColor="@color/white" />
+            </RelativeLayout>
+
+            <!-- Mixture -->
+
+            <!--<RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/diveEquipmentEditMixtureValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dive_equipment_tank_mixture_air"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
+
+                <EditText
+                    android:id="@+id/diveEquipmentEditPressureUnitValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="11dp"
+                    android:gravity="center"
+                    android:text="@string/dive_equipment_tank_mixture_air"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+                <EditText
+                    android:gravity="right"
+                    android:id="@+id/diveEquipmentEditEndPressureValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/diveEquipmentEditPressureUnitValue"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginBottom="42dp"
+                    android:inputType="number"
+                    android:text="50"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+                <TextView
+                    android:id="@+id/diveEquipmentEditEndPressureUnitValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/diveEquipmentEditPressureUnitValue"
+                    android:text="bar"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+            </RelativeLayout>-->
+
+        </FrameLayout>
+
+        <!-- *******************
+                   Divider
+            ******************** -->
+
+        <!-- Suit -->
+
+    </LinearLayout>
+
+</FrameLayout>

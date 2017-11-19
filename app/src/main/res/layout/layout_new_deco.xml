@@ -1,0 +1,48 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:contentDescription="@string/ic_decompression"
+        android:id="@+id/diveSummaryDecoIcon"
+        android:labelFor="@+id/diveSummaryEditDecoMetersValue"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_width="wrap_content"
+        android:src="@drawable/ic_deco" />
+
+    <TextView
+        android:id="@+id/diveSummaryDecoMetersValue"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_width="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/diveSummaryDecoMeters"
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:text="m \ "
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/diveSummaryDecoDurationValue"
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black"
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:id="@+id/diveSummaryDecoDuration"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="10dp"
+        android:layout_width="wrap_content"
+        android:text="'"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black" />
+</LinearLayout>

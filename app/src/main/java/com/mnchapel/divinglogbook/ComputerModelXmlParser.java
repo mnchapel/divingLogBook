@@ -2,6 +2,8 @@ package com.mnchapel.divinglogbook;
 
 import android.content.Context;
 
+import com.mnchapel.divinglogbook.com.mnchapel.divinglogbook.model.Dive;
+
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;

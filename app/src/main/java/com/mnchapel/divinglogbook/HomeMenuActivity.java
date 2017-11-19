@@ -20,6 +20,9 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.ListView;
 
+import com.mnchapel.divinglogbook.com.mnchapel.divinglogbook.model.Dive;
+import com.mnchapel.divinglogbook.com.mnchapel.divinglogbook.model.DiveXmlDocument;
+
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.File;
@@ -306,9 +309,9 @@ public class HomeMenuActivity
 
     /**
      *
-     * @param src
-     * @param dst
-     * @throws IOException
+     * @param src:
+     * @param dst:
+     * @throws IOException:
      */
     public void copy(InputStream src, File dst) throws IOException {
         try {
@@ -381,7 +384,7 @@ public class HomeMenuActivity
 
 
     /**
-     * @brief Getter
+     * Getter
      *
      * @param divePosition:
      *
@@ -394,7 +397,7 @@ public class HomeMenuActivity
 
 
     /**
-     * @brief Get the number of dives.
+     * Get the number of dives.
      *
      * @return the number of dives.
      */
@@ -405,12 +408,12 @@ public class HomeMenuActivity
 
 
     /**
-     * @brief Setter
+     * Setter
      *
      * @param divePosition: the position of the dive in the list.
      * @param dive: the dive.
      */
-    public Dive setDive(int divePosition, Dive dive) {
-        return diveList.set(divePosition, dive);
+    public void setDive(int divePosition, Dive dive) {
+        diveList.set(divePosition, dive);
     }
 }

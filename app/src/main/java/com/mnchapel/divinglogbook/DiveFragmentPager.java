@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.mnchapel.divinglogbook.com.mnchapel.divinglogbook.equipment.DiveEquipmentFragment;
+
 public class DiveFragmentPager extends FragmentStatePagerAdapter {
 
     // Number of tabs

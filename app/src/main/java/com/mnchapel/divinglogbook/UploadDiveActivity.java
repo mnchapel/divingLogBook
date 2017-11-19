@@ -5,15 +5,20 @@ import android.content.Context;
 import android.os.Environment;
 import android.widget.Toast;
 
+import com.mnchapel.divinglogbook.com.mnchapel.divinglogbook.model.Dive;
+import com.mnchapel.divinglogbook.com.mnchapel.divinglogbook.model.DiveXmlDocument;
+import com.mnchapel.divinglogbook.com.mnchapel.divinglogbook.model.SuuntoViperXmlParser;
+
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -64,21 +69,11 @@ public class UploadDiveActivity {
 
 
 
-    /**
-     * @brief Upload dive from the USB external storage.
-     */
-    public void uploadDive(Context context,
-                           List<Dive> diveList) throws IOException, XmlPullParserException {
-        uploadDiveList = new ArrayList<Dive>();
-
-        loadDive(context);
-
-        int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context, uploadDiveList.size()+" new dives loaded.", duration);
-        toast.show();
-
-        // TODO : check if a dive exists before save it on internal storage.
-        saveDive(context);
+    private boolean isFileExist(Context context,
+                                String filename) {
+        String path = context.getFilesDir().getAbsolutePath() + "/" + filename;
+        File file = new File(path);
+        return file.exists();
     }
 
 
@@ -135,13 +130,39 @@ public class UploadDiveActivity {
      */
     private void saveDive(Context context) throws IOException, XmlPullParserException {
 
+        SimpleDateFormat dateFormatFilename = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+
         for(Dive dive: uploadDiveList) {
+            Date startTimeFilename = dive.getStartTime().getTime();
+            String diveFilename = dateFormatFilename.format(startTimeFilename)+".xml";
+            if(isFileExist(context, diveFilename))
+                continue;
+
             DiveXmlDocument diveXmlDocument = new DiveXmlDocument();
 
             diveXmlDocument.writeDive(context, dive);
         }
 
 
+    }
+
+
+
+    /**
+     * @brief Upload dive from the USB external storage.
+     */
+    public void uploadDive(Context context,
+                           List<Dive> diveList) throws IOException, XmlPullParserException {
+        uploadDiveList = new ArrayList<Dive>();
+
+        loadDive(context);
+
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, uploadDiveList.size()+" new dives loaded.", duration);
+        toast.show();
+
+        // TODO : check if a dive exists before save it on internal storage.
+        saveDive(context);
     }
 
 }

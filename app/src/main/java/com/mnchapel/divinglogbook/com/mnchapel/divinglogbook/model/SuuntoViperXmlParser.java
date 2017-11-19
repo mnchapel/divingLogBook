@@ -1,8 +1,12 @@
-package com.mnchapel.divinglogbook;
+package com.mnchapel.divinglogbook.com.mnchapel.divinglogbook.model;
 
 import android.content.Context;
 import android.util.Log;
 import android.util.Xml;
+
+import com.mnchapel.divinglogbook.ComputerModelXmlParser;
+import com.mnchapel.divinglogbook.com.mnchapel.divinglogbook.model.Dive;
+import com.mnchapel.divinglogbook.com.mnchapel.divinglogbook.model.DiveSample;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;

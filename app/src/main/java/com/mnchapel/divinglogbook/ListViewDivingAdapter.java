@@ -2,141 +2,161 @@ package com.mnchapel.divinglogbook;
 
 import android.content.Context;
 
-import android.text.format.DateUtils;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.TreeMap;
 
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.BaseAdapter;
-import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
+import com.mnchapel.divinglogbook.com.mnchapel.divinglogbook.model.Dive;
 
 
 /**
  * Created by Marie-Neige on 11/08/2017.
  */
-public class ListViewDivingAdapter extends BaseExpandableListAdapter {
+public class ListViewDivingAdapter extends RecyclerView.Adapter<ListViewDivingAdapter.ViewHolder> {
 
     //
-    private static LayoutInflater inflater = null;
+    //private static LayoutInflater inflater = null;
 
     //
-    List<List<Dive>> diveList;
+    List<Dive> diveList;
 
     List<String> monthGroup;
+
+    int currentMonthId;
+
+    private OnActionCompleted callBack;
 
 
 
     /**
      * Constructor
      */
-    public ListViewDivingAdapter(Context context,
-                                 List<String> monthGroup,
-                                 List<List<Dive>> diveList) {
+    public ListViewDivingAdapter(List<String> monthGroup,
+                                 List<Dive> diveList,
+                                 OnActionCompleted callBack) {
+        this.callBack = callBack;
         this.monthGroup = monthGroup;
         this.diveList = diveList;
-        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        currentMonthId = 0;
     }
 
+
+
+    /**
+     *
+     * @param parent:
+     * @param viewType:
+     * @return the view holder.
+     */
     @Override
-    public Object getChild(int groupPosition, int childPosition) {
-        return diveList.get(groupPosition).get(childPosition);
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View view = inflater.inflate(R.layout.layout_dive_book_day, parent, false);
+        return new ViewHolder(view, callBack);
     }
 
+
+
+    /**
+     *
+     * @param holder:
+     * @param position:
+     */
     @Override
-    public int getChildrenCount(int groupPosition) {
-        return diveList.get(groupPosition).size();
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        Dive dive = diveList.get(position);
+        Date date = dive.getStartTime().getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd\nEEE");
+
+        String site = dive.getSite();
+        String duration = DateUtils.formatElapsedTime(dive.getDuration());
+        String maxDepth = String.valueOf(dive.getMaxDepth());
+        holder.display(dateFormat.format(date), duration, maxDepth, site);
     }
 
+
+
+    /**
+     *
+     * @param position:
+     * @return
+     */
     @Override
-    public long getChildId(int groupPosition, int childPosition) {
-        return childPosition;
+    public long getItemId(int position) {
+        return position;
     }
 
+
+
+    /**
+     *
+     * @return
+     */
     @Override
-    public View getChildView(int groupPosition,
-                             int childPosition,
-                             boolean b,
-                             View view,
-                             ViewGroup parent) {
-        if(view == null)
-            view = inflater.inflate(R.layout.row, parent, false);
-
-        Date startTime = diveList.get(groupPosition).get(childPosition).getStartTime().getTime();
-
-        // Site
-        TextView site = (TextView) view.findViewById(R.id.rowSiteValue);
-        site.setText(diveList.get(groupPosition).get(childPosition).getSite());
-
-        // Date
-        TextView date = (TextView) view.findViewById(R.id.rowDateValue);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        date.setText(dateFormat.format(startTime));
-
-        // Time in
-        TextView timeIn = (TextView) view.findViewById(R.id.rowTimeIn);
-        SimpleDateFormat timeInFormat = new SimpleDateFormat("HH:mm");
-        timeIn.setText(timeInFormat.format(startTime));
-
-        // Duration
-        TextView duration = (TextView) view.findViewById(R.id.rowDurationValue);
-        duration.setText(DateUtils.formatElapsedTime(diveList.get(groupPosition).get(childPosition).getDuration()));
-
-        // Max Depth
-        TextView maxDepth = (TextView) view.findViewById(R.id.rowMaxDepthValue);
-        maxDepth.setText(Float.toString(diveList.get(groupPosition).get(childPosition).getMaxDepth()));
-
-        return view;
+    public int getItemCount() {
+        return diveList.size();
     }
 
-    @Override
-    public Object getGroup(int groupPosition) {
-        return monthGroup.get(groupPosition);
+
+
+
+
+
+    // Provide a reference to the views for each data item
+    // Complex data items may need more than one view per item, and
+    // you provide access to all the views for a data item in a view holder
+    public static class ViewHolder
+            extends RecyclerView.ViewHolder
+            implements View.OnClickListener {
+
+        private OnActionCompleted callBack;
+        public TextView date;
+        public TextView duration;
+        public TextView maxDepth;
+        public TextView site;
+
+        public ViewHolder(final View view, OnActionCompleted callBack) {
+            super(view);
+
+            view.setOnClickListener(this);
+            this.callBack = callBack;
+
+            date = (TextView) view.findViewById(R.id.diveBookDayDate);
+            duration = (TextView) view.findViewById(R.id.diveBookDayDurationValue);
+            maxDepth = (TextView) view.findViewById(R.id.diveBookDayMaxDepthValue);
+            site = (TextView) view.findViewById(R.id.diveBookDaySiteValue);
+        }
+
+
+        public void display(String dateValue,
+                            String durationValue,
+                            String maxValue,
+                            String siteValue) {
+            date.setText(dateValue);
+            duration.setText(durationValue);
+            maxDepth.setText(maxValue);
+            site.setText(siteValue);
+        }
+
+        @Override
+        public void onClick(View v) {
+            callBack.onClickDiveDay(getLayoutPosition());
+        }
     }
 
-    @Override
-    public int getGroupCount() {
-        return monthGroup.size();
-    }
-
-    @Override
-    public long getGroupId(int groupPosition) {
-        return groupPosition;
-    }
-
-    @Override
-    public View getGroupView(int groupPosition,
-                             boolean b,
-                             View view,
-                             ViewGroup parent) {
-        if(view == null)
-            view = inflater.inflate(R.layout.group_list_expandable, parent, false);
-
-        TextView text = (TextView) view.findViewById(R.id.groupListExpandableMonthText);
-        text.setText(monthGroup.get(groupPosition));
-
-        TextView divingCount = (TextView) view.findViewById(R.id.groupListExpandableDivingCount);
-        divingCount.setText(getChildrenCount(groupPosition)+"");
-
-        return view;
-    }
-
-    @Override
-    public boolean hasStableIds() {
-        return false;
-    }
-
-    @Override
-    public boolean isChildSelectable(int groupPosition,
-                                     int childPosition) {
-        return true;
+    public interface OnActionCompleted {
+        public void onClickDiveDay(int position);
     }
 }
