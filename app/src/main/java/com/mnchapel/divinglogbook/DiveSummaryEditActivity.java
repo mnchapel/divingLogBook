@@ -3,6 +3,7 @@ package com.mnchapel.divinglogbook;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -16,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -39,8 +41,8 @@ import java.util.List;
 
 public class DiveSummaryEditActivity extends AppCompatActivity {
 
-    //
     private Dive dive;
+    private Context context;
 
 
 
@@ -235,8 +237,23 @@ public class DiveSummaryEditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dive_summary_edit);
 
+        context = this;
+
         Bundle bundle = getIntent().getExtras();
         dive = bundle.getParcelable("dive");
+
+
+        /*ArrayAdapter adapter = ArrayAdapter.createFromResource(this,
+                R.array.objective_name, R.layout.layout_spinner);
+        adapter.setDropDownViewResource(R.layout.layout_drop_down_spinner);*/
+        Spinner spinnerObjective = (Spinner) findViewById(R.id.diveSummaryEditObjectiveValue);
+        //spinnerObjective.setAdapter(adapter);
+        Spinner spinnerBottomTemperatureUnit = (Spinner) findViewById(R.id.diveSummaryEditBottomTemperatureUnit);
+        //spinnerBottomTemperatureUnit.setAdapter(adapter);
+        initSpinnerAdapter(spinnerObjective, R.array.objective_name);
+        initSpinnerAdapter(spinnerBottomTemperatureUnit, R.array.bottom_temperature_unit);
+
+
 
         fillForm();
         setListeners();
@@ -249,7 +266,7 @@ public class DiveSummaryEditActivity extends AppCompatActivity {
         actionBar.setCustomView(customView);
         actionBar.setDisplayShowCustomEnabled(true);
         Toolbar parent = (Toolbar) customView.getParent();
-        parent.setNavigationIcon(R.drawable.close_cross);
+        parent.setNavigationIcon(R.drawable.close_cross_black);
         parent.setContentInsetsAbsolute(0,0);
 
         parent.setNavigationOnClickListener(new View.OnClickListener() {
@@ -258,6 +275,14 @@ public class DiveSummaryEditActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+
+
+    public void initSpinnerAdapter(Spinner spinner, int textArrayResId) {
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(context, textArrayResId, R.layout.layout_spinner);
+        adapter.setDropDownViewResource(R.layout.layout_drop_down_spinner);
+        spinner.setAdapter(adapter);
     }
 
 

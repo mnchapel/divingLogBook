@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/nitrogenGazLayout"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:background="@drawable/circle"
+        android:gravity="center"
+        android:labelFor="@+id/oxygenGazValue"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:padding="10dp"
+        android:text="@string/nitrogen_symbol"
+        android:textColor="#FFFFFF" />
+
+    <EditText
+        android:minEms="1"
+        android:id="@+id/oxygenGazValue"
+        android:inputType="numberDecimal"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_width="wrap_content"
+        android:textColor="#FFFFFF"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+    <TextView
+        android:id="@+id/oxygenGazPercent"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/percent_symbol"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textColor="#FFFFFF" />
+
+</LinearLayout>

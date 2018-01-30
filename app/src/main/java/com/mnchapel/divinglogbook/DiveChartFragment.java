@@ -35,9 +35,13 @@ public class DiveChartFragment extends Fragment {
         Dive dive = activity.getDive(diveKey);
         List<DiveSample> diveSampleList = dive.getDiveSampleList();
 
-        LineGraph lineGraph = (LineGraph) view.findViewById(R.id.diveChartLineGraph);
-        lineGraph.setDiveSample(diveSampleList);
-        lineGraph.setSampleInterval(dive.getSampleInterval());
+        LineGraph depthLineGraph = (LineGraph) view.findViewById(R.id.diveChartDepthLineGraph);
+        depthLineGraph.setDiveSample(diveSampleList);
+        depthLineGraph.setSampleInterval(dive.getSampleInterval());
+
+        LineGraph temperatureLineGraph = (LineGraph) view.findViewById(R.id.diveChartTemperatureLineGraph);
+        temperatureLineGraph.setDiveSample(diveSampleList);
+        temperatureLineGraph.setSampleInterval(dive.getSampleInterval());
 
         // Inflate the layout for this fragment
         return view;

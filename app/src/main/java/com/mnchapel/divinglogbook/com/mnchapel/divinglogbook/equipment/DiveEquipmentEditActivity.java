@@ -50,14 +50,13 @@ public class DiveEquipmentEditActivity
 
         Bundle bundle = getIntent().getExtras();
         equipment = bundle.getParcelable("equipment");
-        ImageView imageBackground = (ImageView) findViewById(R.id.diveEquipmentEditImageBackground);
 
         switch (equipment.getType()) {
             case TANK:
-                imageBackground.setImageResource(R.drawable.tank_background);
+                setContentView(R.layout.activity_dive_equipment_tank_edit);
                 break;
             case SUIT:
-                imageBackground.setImageResource(R.drawable.equipment_suit_background);
+                setContentView(R.layout.activity_dive_equipment_suit_edit);
                 break;
         }
 
@@ -69,7 +68,7 @@ public class DiveEquipmentEditActivity
         actionBar.setCustomView(customView);
         actionBar.setDisplayShowCustomEnabled(true);
         Toolbar parent = (Toolbar) customView.getParent();
-        parent.setNavigationIcon(R.drawable.close_cross);
+        parent.setNavigationIcon(R.drawable.close_cross_black);
         parent.setContentInsetsAbsolute(0,0);
 
         parent.setNavigationOnClickListener(new View.OnClickListener() {

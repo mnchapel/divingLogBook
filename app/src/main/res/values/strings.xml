@@ -51,9 +51,14 @@
 
     <!-- Dive chart -->
     <string name="dive_chart_depth_graph_section_title">Depth graph</string>
+    <string name="dive_chart_temperature_graph_section_title">Temperature graph</string>
 
     <!-- Dive equipment -->
     <string name="dive_equipment_tank_mixture_air">AIR</string>
+
+    <string name="oxygen_symbol">02</string>
+    <string name="nitrogen_symbol">N2</string>
+    <string name="percent_symbol">%</string>
 
     <string-array name="equipment_suit_type">
         <item>Dry</item>
@@ -63,6 +68,13 @@
     <string-array name="equipment_tank_type">
         <item>Simple</item>
         <item>Twin</item>
+    </string-array>
+
+    <string-array name="equipment_tank_mixture">
+        <item>Air</item>
+        <item>Nitrox</item>
+        <item>Trimix</item>
+        <item>Heliox</item>
     </string-array>
 
     <!-- Dive equipment add item list -->
@@ -95,5 +107,9 @@
     values-round/strings.xml for round devices.
     -->
     <string name="hello_world">Hello Square World!</string>
+
+
+
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</string>
 
 </resources>

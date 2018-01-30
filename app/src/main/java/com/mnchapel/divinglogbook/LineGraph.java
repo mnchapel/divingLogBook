@@ -17,11 +17,13 @@ import java.util.List;
  */
 
 public class LineGraph extends View {
-    private Paint paint;
+    private Paint paintLineGraph;
+    private Paint paintAxis;
     private Paint polygonPaint;
     private List<DiveSample> diveSamples;
     private int sampleInterval;
     private Path background;
+    private float height;
 
 
 
@@ -35,13 +37,16 @@ public class LineGraph extends View {
         super(context, attributeSet);
 
         background = new Path();
-        paint = new Paint();
-        paint.setColor(Color.BLACK);
-        paint.setStrokeWidth(5);
+        paintLineGraph = new Paint();
+        paintLineGraph.setColor(Color.BLACK);
+        paintLineGraph.setStrokeWidth(5);
+
+        paintAxis = new Paint();
+        paintAxis.setColor(Color.WHITE);
 
         polygonPaint = new Paint();
         polygonPaint.setStyle(Paint.Style.FILL);
-        polygonPaint.setColor(getResources().getColor(R.color.blue));
+        polygonPaint.setColor(getResources().getColor(R.color.whiteGray));
     }
 
 
@@ -87,7 +92,7 @@ public class LineGraph extends View {
 
             background.lineTo(timeScaled, depthScaled);
 
-            canvas.drawLine(previousTime, previousDepth, timeScaled, depthScaled, paint);
+            canvas.drawLine(previousTime, previousDepth, timeScaled, depthScaled, paintLineGraph);
 
             maxDepth = (maxDepth>depthScaled)?maxDepth:depthScaled;
 
@@ -98,17 +103,23 @@ public class LineGraph extends View {
         background.lineTo(xOrigin, yOrigin);
 
         canvas.drawPath(background, polygonPaint);
-        canvas.drawLine(xOrigin,yOrigin,xOrigin, maxDepth, paint);
+
+        // Paint axis
+        canvas.drawLine(xOrigin,yOrigin,xOrigin, maxDepth, paintAxis);
+
+        height = 500;
     }
 
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+
         int minw = getPaddingLeft() + getPaddingRight() + getSuggestedMinimumWidth();
         int w = resolveSizeAndState(minw, widthMeasureSpec, 1);
 
         int minh = MeasureSpec.getSize(w) + getPaddingBottom() + getPaddingTop();
-        int h = resolveSizeAndState(MeasureSpec.getSize(w), heightMeasureSpec, 0);
+        int h = resolveSizeAndState(minh, heightMeasureSpec, 0);
 
         setMeasuredDimension(w, h);
     }

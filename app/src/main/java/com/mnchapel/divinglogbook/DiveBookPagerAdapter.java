@@ -2,6 +2,7 @@ package com.mnchapel.divinglogbook;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -26,9 +27,9 @@ import java.util.List;
 
 public class DiveBookPagerAdapter extends PagerAdapter {
 
-    Context context;
-    List<String> monthGroup;
-    List<List<Dive>> monthOrderedDive;
+    private Context context;
+    private List<String> monthGroup;
+    private List<List<Dive>> monthOrderedDive;
     private ListViewDivingAdapter.OnActionCompleted callBack;
 
 
@@ -49,9 +50,9 @@ public class DiveBookPagerAdapter extends PagerAdapter {
 
     /**
      *
-     * @param container
-     * @param position
-     * @param object
+     * @param container:
+     * @param position:
+     * @param object:
      */
     @Override
     public void destroyItem(ViewGroup container, int position, Object object)  {
@@ -74,7 +75,7 @@ public class DiveBookPagerAdapter extends PagerAdapter {
      *
      * @param container:
      * @param position:
-     * @return
+     * @return view
      */
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
@@ -82,8 +83,8 @@ public class DiveBookPagerAdapter extends PagerAdapter {
 
         initRecyclerView(view, position);
 
-        TextView diveBookMonth = (TextView) view.findViewById(R.id.diveBookMonth);
-        diveBookMonth.setText(monthGroup.get(position));
+        CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) view.findViewById(R.id.diveBookCollapsingToolbarLayout);
+        collapsingToolbarLayout.setTitle(monthGroup.get(position));
 
         container.addView(view);
 
@@ -110,25 +111,4 @@ public class DiveBookPagerAdapter extends PagerAdapter {
     public boolean isViewFromObject(View view, Object object) {
         return view == ((CoordinatorLayout) object);
     }
-
-
-
-    /*@Override
-    public void onClick(int position){
-        Fragment fragment = new DiveActivity();
-        Bundle args = new Bundle();
-
-        args.putInt("diveKey", getDiveId(groupPosition, position));
-        fragment.setArguments(args);
-
-
-        // Insert the fragment by replacing any existing fragment
-        FragmentManager fragment_manager = getActivity().getSupportFragmentManager();
-        fragment_manager.beginTransaction()
-                .replace(R.id.content_frame, fragment)
-                .commit();
-
-        getActivity().setTitle("Dive #" + (activity.getDiveSize() - getDiveId(groupPosition, position)));
-
-    }*/
 }

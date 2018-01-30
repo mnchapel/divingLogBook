@@ -83,7 +83,7 @@
                 android:layout_width="15dp"
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
-                app:srcCompat="@drawable/duration_icon" />
+                app:srcCompat="@drawable/ic_duration_white" />
 
             <!-- duration -->
             <TextView
@@ -101,7 +101,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="20dp"
                 android:adjustViewBounds="true"
-                app:srcCompat="@drawable/max_depth_icon" />
+                app:srcCompat="@drawable/ic_depth_white" />
 
             <!-- max depth text -->
             <TextView

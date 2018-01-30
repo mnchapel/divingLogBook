@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
         android:layout_width="wrap_content"
-        android:src="@drawable/ic_deco" />
+        android:src="@drawable/ic_deco_white" />
 
     <EditText
         android:hint="@string/dive_summary_hint_deco_meters"
@@ -22,7 +22,8 @@
         android:layout_weight="1"
         android:inputType="numberSigned"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/black" />
+        android:textColor="@color/white"
+        android:textColorHint="@color/whiteGray" />
 
     <TextView
         android:id="@+id/diveSummaryEditDecoMeters"
@@ -31,7 +32,7 @@
         android:layout_width="wrap_content"
         android:text="m"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/black" />
+        android:textColor="@color/white" />
 
     <EditText
         android:hint="@string/dive_summary_hint_deco_minutes"
@@ -42,7 +43,8 @@
         android:layout_weight="1"
         android:inputType="numberSigned"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
+        android:textColorHint="@color/whiteGray"
         tools:ignore="LabelFor" />
 
     <TextView
@@ -53,5 +55,5 @@
         android:layout_width="wrap_content"
         android:text="'"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/black" />
+        android:textColor="@color/white" />
 </LinearLayout>

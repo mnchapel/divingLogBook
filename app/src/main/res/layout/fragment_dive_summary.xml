@@ -2,6 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/background_gradient"
     android:fillViewport="true"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
@@ -13,7 +14,6 @@
         android:layout_width="match_parent" >
 
         <LinearLayout
-            android:background="#FFFFFF"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:orientation="vertical"
@@ -22,7 +22,6 @@
 
             <!-- General section -->
             <LinearLayout
-                android:background="#FFFFFF"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:paddingLeft="30dp"
@@ -36,41 +35,36 @@
                     android:layout_width="match_parent"
                     android:text="@string/dive_summary_general_section_title"
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/white" />
 
                 <!-- Date -->
-                <RelativeLayout
+                <LinearLayout
                     android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="15dp"
                     android:layout_width="match_parent">
 
                     <ImageView
                         android:contentDescription="@string/ic_calendar"
                         android:id="@+id/diveSummaryDateIcon"
-                        android:layout_centerVertical="true"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
                         android:layout_width="wrap_content"
-                        android:src="@drawable/ic_calendar" />
+                        android:src="@drawable/ic_calendar_white" />
 
                     <TextView
                         android:id="@+id/diveSummaryDateValue"
+                        android:layout_gravity="center"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:layout_toEndOf="@id/diveSummaryDateIcon"
                         android:layout_width="wrap_content"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/black" />
-                </RelativeLayout>
+                        android:textColor="@color/white" />
+                </LinearLayout>
 
                 <!-- Site -->
-                <RelativeLayout
+                <LinearLayout
                     android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent">
 
@@ -79,65 +73,66 @@
                         android:id="@+id/diveSummaryMapMarkerIconSite"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
                         android:layout_marginEnd="10dp"
-                        android:src="@drawable/ic_map_marker" />
+                        android:src="@drawable/ic_map_marker_white" />
 
                     <TextView
                         android:id="@+id/diveSummarySiteValue"
-                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:layout_toEndOf="@id/diveSummaryMapMarkerIconSite"
+                        android:layout_width="wrap_content"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/black" />
-                </RelativeLayout>
+                        android:textColor="@color/white" />
+                </LinearLayout>
 
                 <!-- Town/Country -->
                 <LinearLayout
                     android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="15dp"
                     android:layout_width="match_parent">
 
                     <ImageView
                         android:contentDescription="@string/ic_map_marker"
                         android:id="@+id/diveSummaryMapMarkerIconTownCountry"
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginEnd="10dp"
-                        android:src="@drawable/ic_map_marker"
+                        android:layout_width="wrap_content"
+                        android:src="@drawable/ic_map_marker_white"
                         android:visibility="invisible" />
 
                     <TextView
                         android:id="@+id/diveSummaryTownValue"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/white" />
 
                     <TextView
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:text="@string/comma"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/white" />
 
                     <TextView
                         android:id="@+id/diveSummaryCountryValue"
+                        android:layout_gravity="center_vertical"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_width="wrap_content"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/white" />
                 </LinearLayout>
 
                 <!-- Objective -->
-                <RelativeLayout
+                <LinearLayout
                     android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_width="match_parent">
@@ -147,25 +142,22 @@
                         android:id="@+id/diveSummaryTownTargetIcon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
                         android:layout_marginEnd="10dp"
-                        android:src="@drawable/ic_target" />
+                        android:src="@drawable/ic_target_white" />
 
                     <TextView
                         android:id="@+id/diveSummaryObjectiveValue"
-                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:layout_toEndOf="@id/diveSummaryTownTargetIcon"
+                        android:layout_width="wrap_content"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/black" />
-                </RelativeLayout>
+                        android:textColor="@color/white" />
+                </LinearLayout>
 
                 <!-- Buddy -->
                 <LinearLayout
                     android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
                     android:id="@+id/diveSummaryLayoutBuddy"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
@@ -173,10 +165,8 @@
                     android:orientation="vertical"/> <!-- Buddy end -->
 
                 <!-- Instructor -->
-                <RelativeLayout
+                <LinearLayout
                     android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_width="match_parent">
@@ -184,21 +174,20 @@
                     <ImageView
                         android:contentDescription="@string/ic_instructor"
                         android:id="@+id/diveSummaryInstructorIcon"
-                        android:layout_centerVertical="true"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
                         android:layout_width="wrap_content"
-                        android:src="@drawable/ic_instructor" />
+                        android:src="@drawable/ic_instructor_white" />
 
                     <TextView
                         android:id="@+id/diveSummaryInstructorValue"
+                        android:layout_gravity="center"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:layout_toEndOf="@id/diveSummaryInstructorIcon"
                         android:layout_width="wrap_content"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/black" />
-                </RelativeLayout> <!-- Instructor end -->
+                        android:textColor="@color/white" />
+                </LinearLayout> <!-- Instructor end -->
 
             </LinearLayout> <!-- General section end -->
 
@@ -218,7 +207,6 @@
                   Conditions section
                 ******************** -->
             <LinearLayout
-                android:background="#FFFFFF"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:paddingLeft="30dp"
@@ -232,14 +220,12 @@
                     android:layout_marginTop="20dp"
                     android:layout_width="match_parent"
                     android:text="@string/dive_summary_conditions_section_title"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
 
                 <!-- Visibility -->
                 <RelativeLayout
                     android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_width="match_parent">
@@ -251,7 +237,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
                         android:layout_width="wrap_content"
-                        android:src="@drawable/ic_visibility" />
+                        android:src="@drawable/ic_visibility_white" />
 
                     <RatingBar
                         android:id="@+id/diveSummaryVisibilityValue"
@@ -266,10 +252,8 @@
                 </RelativeLayout>
 
                 <!-- Bottom temperature -->
-                <RelativeLayout
+                <LinearLayout
                     android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_width="match_parent">
@@ -277,21 +261,20 @@
                     <ImageView
                         android:contentDescription="@string/ic_thermometer"
                         android:id="@+id/diveSummaryBottomTemperatureIcon"
-                        android:layout_centerVertical="true"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
                         android:layout_width="wrap_content"
-                        android:src="@drawable/ic_thermometer" />
+                        android:src="@drawable/ic_thermometer_white" />
 
                     <TextView
                         android:id="@+id/diveSummaryBottomTemperatureValue"
+                        android:layout_gravity="center"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:layout_toEndOf="@id/diveSummaryBottomTemperatureIcon"
                         android:layout_width="wrap_content"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/black" />
-                </RelativeLayout>
+                        android:textColor="@color/white" />
+                </LinearLayout>
 
             </LinearLayout> <!-- Conditions section end -->
 
@@ -312,7 +295,6 @@
                    Summary section
                 ******************** -->
             <LinearLayout
-                android:background="#FFFFFF"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:paddingLeft="30dp"
@@ -326,7 +308,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_width="match_parent"
                     android:text="@string/dive_summary_summary_section_title"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
 
                 <LinearLayout
@@ -336,10 +318,8 @@
                     android:baselineAligned="false">
 
                     <!-- Duration -->
-                    <RelativeLayout
+                    <LinearLayout
                         android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:focusable="true"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:layout_weight="1"
@@ -348,27 +328,24 @@
                         <ImageView
                             android:contentDescription="@string/ic_duration"
                             android:id="@+id/diveSummaryTimeIcon"
-                            android:layout_centerVertical="true"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="10dp"
                             android:layout_width="wrap_content"
-                            android:src="@drawable/ic_time" />
+                            android:src="@drawable/ic_duration_white" />
 
                         <TextView
                             android:id="@+id/diveSummaryDurationValue"
+                            android:layout_gravity="center"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:layout_toEndOf="@id/diveSummaryTimeIcon"
                             android:layout_width="wrap_content"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="@color/black" />
-                    </RelativeLayout>
+                            android:textColor="@color/white" />
+                    </LinearLayout>
 
                     <!-- Max depth -->
-                    <RelativeLayout
+                    <LinearLayout
                         android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:focusable="true"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:layout_weight="1"
@@ -377,21 +354,20 @@
                         <ImageView
                             android:contentDescription="@string/ic_depth"
                             android:id="@+id/diveSummaryMaxDepthIcon"
-                            android:layout_centerVertical="true"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="10dp"
                             android:layout_width="wrap_content"
-                            android:src="@drawable/ic_depth" />
+                            android:src="@drawable/ic_depth_white" />
 
                         <TextView
                             android:id="@+id/diveSummaryMaxDepthValue"
+                            android:layout_gravity="center"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:layout_toEndOf="@id/diveSummaryMaxDepthIcon"
                             android:layout_width="wrap_content"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="@color/black" />
-                    </RelativeLayout>
+                            android:textColor="@color/white" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -401,10 +377,8 @@
                     android:baselineAligned="false">
 
                     <!-- Time in -->
-                    <RelativeLayout
+                    <LinearLayout
                         android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:focusable="true"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:layout_weight="1"
@@ -413,27 +387,24 @@
                         <ImageView
                             android:contentDescription="@string/ic_depth"
                             android:id="@+id/diveSummaryTimeInIcon"
-                            android:layout_centerVertical="true"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="10dp"
                             android:layout_width="wrap_content"
-                            android:src="@drawable/ic_time_in" />
+                            android:src="@drawable/ic_time_in_white" />
 
                         <TextView
                             android:id="@+id/diveSummaryTimeInValue"
+                            android:layout_gravity="center"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:layout_toEndOf="@id/diveSummaryTimeInIcon"
                             android:layout_width="wrap_content"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="@color/black" />
-                    </RelativeLayout>
+                            android:textColor="@color/white" />
+                    </LinearLayout>
 
                     <!-- Time out -->
-                    <RelativeLayout
+                    <LinearLayout
                         android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:focusable="true"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:layout_weight="1"
@@ -442,28 +413,25 @@
                         <ImageView
                             android:contentDescription="@string/ic_depth"
                             android:id="@+id/diveSummaryTimeOutIcon"
-                            android:layout_centerVertical="true"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="10dp"
                             android:layout_width="wrap_content"
-                            android:src="@drawable/ic_time_out" />
+                            android:src="@drawable/ic_time_out_white" />
 
                         <TextView
                             android:id="@+id/diveSummaryTimeOutValue"
+                            android:layout_gravity="center"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:layout_toEndOf="@id/diveSummaryTimeOutIcon"
                             android:layout_width="wrap_content"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="@color/black" />
-                    </RelativeLayout>
+                            android:textColor="@color/white" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <!-- Decompression -->
                 <LinearLayout
                     android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
                     android:id="@+id/diveSummaryLayoutDecompression"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
@@ -481,7 +449,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:backgroundTint="@color/blue"
+        app:backgroundTint="@color/white"
         app:srcCompat="@android:drawable/ic_menu_edit" />
 
 </FrameLayout>

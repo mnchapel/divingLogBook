@@ -17,33 +17,29 @@
     <!-- <include layout="@layout/layout_add_dive"/>-->
 
     <android.support.design.widget.AppBarLayout
-        android:fitsSystemWindows="true"
         android:layout_height="200dp"
         android:layout_width="match_parent">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:fitsSystemWindows="true"
+            android:id="@+id/diveBookCollapsingToolbarLayout"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:collapsedTitleTextAppearance="@style/CollapsedTitleToolbar"
+            app:expandedTitleTextAppearance="@style/ExpandedTitleToolbar"
+            app:expandedTitleMarginStart="48dp"
+            app:expandedTitleMarginEnd="64dp"
+            app:title="Test" >
 
-            <!--<ImageView
+            <ImageView
+                android:fitsSystemWindows="true"
                 android:id="@+id/main.backdrop"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:fitsSystemWindows="true"
-                android:src="@drawable/equipment_suit_background"
-                app:layout_collapseMode="parallax" />-->
-
-            <TextView
-                android:id="@+id/diveBookMonth"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginStart="20dp"
-                android:layout_marginBottom="20dp"
-                android:layout_width="match_parent"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display3" />
+                android:src="@drawable/material_flat"
+                app:layout_collapseMode="parallax" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/main.toolbar"

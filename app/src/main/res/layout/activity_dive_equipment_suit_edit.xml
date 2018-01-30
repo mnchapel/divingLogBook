@@ -2,7 +2,7 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#f1f1f1"
+    android:background="@drawable/background_gradient"
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true"
     android:layout_width="match_parent"
@@ -10,18 +10,16 @@
     tools:context="com.mnchapel.divinglogbook.DiveSummaryEditActivity">
 
     <LinearLayout
-        android:background="#FFFFFF"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:paddingBottom="20dp"
         android:paddingTop="20dp">
 
-
-
         <!-- Tank -->
         <Spinner
             android:entries="@array/equipment_suit_type"
+            android:id="@+id/diveEquipmentSuitEditType"
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"
             android:layout_height="wrap_content"
@@ -30,7 +28,6 @@
             android:textColor="@color/black" />
 
         <FrameLayout
-            android:background="#FFFFFF"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:orientation="horizontal"
@@ -39,16 +36,7 @@
 
             <ImageView
                 android:adjustViewBounds="true"
-                android:id="@+id/diveEquipmentEditTankTouchZone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="fitCenter"
-                android:src="@drawable/tank_background_zone"
-                android:visibility="invisible" />
-
-            <ImageView
-                android:adjustViewBounds="true"
-                android:id="@+id/diveEquipmentEditImageBackground"
+                android:id="@+id/diveEquipmentSuitEditImageBackground"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scaleType="fitCenter"

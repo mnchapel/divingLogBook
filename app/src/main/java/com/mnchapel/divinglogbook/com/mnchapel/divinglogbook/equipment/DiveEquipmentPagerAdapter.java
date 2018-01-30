@@ -43,7 +43,7 @@ public class DiveEquipmentPagerAdapter extends PagerAdapter {
      */
     @Override
     public int getCount() {
-        return 0;
+        return Math.max(equipmentItemList.size(),1);
     }
 
 
@@ -60,16 +60,22 @@ public class DiveEquipmentPagerAdapter extends PagerAdapter {
 
         ImageView itemImageView = (ImageView) equipmentItemView.findViewById(R.id.equipmentItemImageView);
 
-        Equipment equipment = equipmentItemList.get(position);
-        switch (equipment.getType()) {
-            case TANK:
-                itemImageView.setImageResource(R.drawable.tank_background);
-                break;
-            case SUIT:
-                itemImageView.setImageResource(R.drawable.equipment_suit_background);
-                break;
-            default:
-                break;
+        if(equipmentItemList.size() == 0)
+        {
+            itemImageView.setImageResource(R.drawable.equipment_diving_suit_background);
+        }
+        else {
+            Equipment equipment = equipmentItemList.get(position);
+            switch (equipment.getType()) {
+                case TANK:
+                    itemImageView.setImageResource(R.drawable.equipment_simple_tank_background);
+                    break;
+                case SUIT:
+                    itemImageView.setImageResource(R.drawable.equipment_suit_background);
+                    break;
+                default:
+                    break;
+            }
         }
 
         container.addView(equipmentItemView);

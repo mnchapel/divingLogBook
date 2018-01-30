@@ -9,10 +9,7 @@ import android.os.Parcelable;
 
 public class DiveSample implements Parcelable {
 
-    // The depth of the sample.
     float depth;
-
-    // The time of the sample.
     int time;
 
 

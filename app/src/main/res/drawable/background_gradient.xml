@@ -17,10 +17,11 @@
 
             <gradient
                 android:angle="90"
-                android:startColor="#60c1c7"
+                android:startColor="#4e9cb4"
                 android:endColor="#38719e"
                 android:type="linear" />
 
+            <!--android:startColor="#60c1c7"-->
         </shape>
     </item>
 </selector>

@@ -25,7 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BaseDriveActivity" />
+        <activity android:name=".BaseDriveActivity"/>
         <activity
             android:name=".DiveSummaryEditActivity"
             android:label="@string/title_activity_dive_summary_edit" />
@@ -34,8 +34,9 @@
             android:label="@string/title_activity_dive_equipement_edit" />
         <activity
             android:name=".com.mnchapel.divinglogbook.equipment.DiveEquipmentTankEditActivity"
-            android:label="@string/title_activity_dive_equipment_tank_edit"></activity>
-        <activity android:name=".com.mnchapel.divinglogbook.equipment.DiveEquipmentSuitEditActivity"></activity>
+            android:label="@string/title_activity_dive_equipment_tank_edit">
+        </activity>
+        <activity android:name=".com.mnchapel.divinglogbook.equipment.DiveEquipmentSuitEditActivity"/>
     </application>
 
 </manifest>
