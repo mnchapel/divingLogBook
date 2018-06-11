@@ -14,217 +14,172 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:paddingBottom="20dp"
-        android:paddingTop="20dp">
+        android:paddingTop="20dp"
+        android:weightSum="10">
 
+        <!-- Mixture Layout-->
         <LinearLayout
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:id="@+id/diveEquipmentTankEditMixture"
+            android:layout_height="0dp"
+            android:layout_weight="3"
             android:layout_width="match_parent"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <!-- Tank type -->
-            <Spinner
-                android:entries="@array/equipment_tank_type"
-                android:id="@+id/diveEquipmentTankEditType"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp" />
+            <include layout="@layout/sample_percentage_circle"/>
 
         </LinearLayout>
 
-        <FrameLayout
-            android:id="@+id/diveEquipmentTankEditFrameLayout"
-            android:layout_height="wrap_content"
+        <!-- Tank type -->
+        <LinearLayout
+            android:id="@+id/diveEquipmentTankEditCaracteristic"
+            android:gravity="center"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:paddingBottom="60dp"
-            android:paddingTop="100dp"
             android:orientation="horizontal">
 
-            <ImageView
-                android:adjustViewBounds="true"
-                android:id="@+id/diveEquipmentTankEditImageBackground"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/equipment_simple_tank_background" />
-
-            <!-- Mixture -->
-            <LinearLayout
-                android:id="@+id/diveEquipmentTankEditMixture"
-                android:layout_height="wrap_content"
-                android:paddingEnd="0dp"
-                android:paddingStart="15dp"
-                android:layout_width="match_parent"
-                android:orientation="vertical">
-
-                <!-- Mixture -->
-                <Spinner
-                    android:entries="@array/equipment_tank_mixture"
-                    android:id="@+id/diveEquipmentTankEditMixtureValue"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_width="wrap_content" />
-
-                <!--<include layout="@layout/layout_oxygen_gaz"/>-->
-
-            </LinearLayout>
-
-
-            <!-- Liter -->
-            <LinearLayout
-                android:id="@+id/diveEquipmentTankEditVolumeValueUnit"
+            <Spinner
+                android:id="@+id/diveEquipmentTankEditType"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/diveEquipmentTankEditVolumeValue"
-                    android:imeOptions="actionDone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:inputType="numberSigned"
-                    android:text="12"
-                    android:textAlignment="textEnd"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    android:id="@+id/diveEquipmentTankEditVolumeUnit"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:layout_width="wrap_content"
-                    android:text="L"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                    android:textColor="@color/white"/>
-            </LinearLayout>
-
-
-            <!-- Start pressure -->
-            <RelativeLayout
-                android:id="@+id/diveEquipmentTankEditStartPressure"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content">
+                android:entries="@array/equipment_tank_type" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="6"
+            android:layout_height="0dp">
+
+            <FrameLayout
+                android:id="@+id/diveEquipmentTankEditFrameLayout"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:adjustViewBounds="true"
+                    android:id="@+id/diveEquipmentTankEditImageBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/equipment_simple_tank_background" />
+
+
+                <!-- Liter -->
                 <LinearLayout
-                    android:id="@+id/diveEquipmentTankEditStartPressureValueUnit"
+                    android:id="@+id/diveEquipmentTankEditVolume"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/diveEquipmentTankEditStartPressureValue"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
+                        android:id="@+id/diveEquipmentTankEditVolumeValueUnit"
+                        android:background="?attr/editTextBackground"
                         android:layout_width="wrap_content"
-                        android:maxEms="2"
-                        android:minEms="2"
-                        android:text="250"
+                        android:layout_height="wrap_content"
+                        android:text="12 L"
                         android:textAlignment="textEnd"
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                         android:textColor="@color/white"/>
 
                     <TextView
-                        android:id="@+id/diveEquipmentTankEditStartPressureUnit"
+                        android:id="@+id/diveEquipmentTankEditWeightValueUnit"
+                        android:background="?attr/editTextBackground"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
                         android:layout_width="wrap_content"
-                        android:text="bar"
+                        android:text="15 kg"
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                         android:textColor="@color/white"/>
                 </LinearLayout>
 
-                <View
-                    android:background="#FFFFFF"
-                    android:id="@+id/diveEquipmentTankEditStartPressureLine"
-                    android:layout_below="@+id/diveEquipmentTankEditStartPressureValueUnit"
-                    android:layout_height="1dp"
-                    android:layout_width="wrap_content"/>
-            </RelativeLayout>
 
-
-            <!-- End pressure -->
-            <RelativeLayout
-                android:id="@+id/diveEquipmentTankEditEndPressure"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/diveEquipmentTankEditEndPressureValue"
+                <!-- Start pressure -->
+                <RelativeLayout
+                    android:id="@+id/diveEquipmentTankEditStartPressure"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
+                    android:layout_width="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/diveEquipmentTankEditStartPressureValueAndUnit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/diveEquipmentTankEditStartPressureValue"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:layout_width="wrap_content"
+                            android:maxEms="2"
+                            android:minEms="2"
+                            android:text="250"
+                            android:textAlignment="textEnd"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                            android:textColor="@color/white"/>
+
+                        <TextView
+                            android:id="@+id/diveEquipmentTankEditStartPressureUnit"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:layout_width="wrap_content"
+                            android:text="bar"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                            android:textColor="@color/white"/>
+                    </LinearLayout>
+
+                    <View
+                        android:background="#FFFFFF"
+                        android:id="@+id/diveEquipmentTankEditStartPressureLine"
+                        android:layout_below="@+id/diveEquipmentTankEditStartPressureValueAndUnit"
+                        android:layout_height="1dp"
+                        android:layout_width="wrap_content"/>
+                </RelativeLayout>
+
+
+                <!-- End pressure -->
+                <RelativeLayout
+                    android:id="@+id/diveEquipmentTankEditEndPressure"
                     android:layout_width="wrap_content"
-                    android:maxEms="2"
-                    android:minEms="2"
-                    android:text="0"
-                    android:textAlignment="textEnd"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                    android:textColor="@color/white"/>
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/diveEquipmentTankEditEndPressureUnitValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/diveEquipmentTankEditEndPressureValue"
-                    android:layout_alignBaseline="@id/diveEquipmentTankEditEndPressureValue"
-                    android:text="bar"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                    android:textColor="@color/white" />
+                    <LinearLayout
+                        android:id="@+id/diveEquipmentTankEditEndPressureValueAndUnit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/diveEquipmentTankEditEndPressureValue"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:layout_width="wrap_content"
+                            android:maxEms="2"
+                            android:minEms="2"
+                            android:text="0"
+                            android:textAlignment="textEnd"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                            android:textColor="@color/white"/>
 
-                <View
-                    android:background="#FFFFFF"
-                    android:id="@+id/diveEquipmentTankEditEndPressureLine"
-                    android:layout_below="@+id/diveEquipmentTankEditEndPressureValue"
-                    android:layout_height="1dp"
-                    android:layout_width="wrap_content"/>
-            </RelativeLayout>
+                        <TextView
+                            android:id="@+id/diveEquipmentTankEditEndPressureUnitValue"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:layout_width="wrap_content"
+                            android:text="bar"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
 
-            <!-- Mixture -->
+                    <View
+                        android:background="#FFFFFF"
+                        android:id="@+id/diveEquipmentTankEditEndPressureLine"
+                        android:layout_below="@+id/diveEquipmentTankEditEndPressureValueAndUnit"
+                        android:layout_height="1dp"
+                        android:layout_width="wrap_content"/>
+                </RelativeLayout>
 
-            <!--<RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <EditText
-                    android:id="@+id/diveEquipmentEditMixtureValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/dive_equipment_tank_mixture_air"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
-
-                <EditText
-                    android:id="@+id/diveEquipmentEditPressureUnitValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="11dp"
-                    android:gravity="center"
-                    android:text="@string/dive_equipment_tank_mixture_air"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
-
-                <EditText
-                    android:gravity="right"
-                    android:id="@+id/diveEquipmentEditEndPressureValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/diveEquipmentEditPressureUnitValue"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginBottom="42dp"
-                    android:inputType="number"
-                    android:text="50"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
-
-                <TextView
-                    android:id="@+id/diveEquipmentEditEndPressureUnitValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_above="@+id/diveEquipmentEditPressureUnitValue"
-                    android:text="bar"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
-
-            </RelativeLayout>-->
-
-        </FrameLayout>
+            </FrameLayout>
+        </LinearLayout>
 
         <!-- *******************
                    Divider

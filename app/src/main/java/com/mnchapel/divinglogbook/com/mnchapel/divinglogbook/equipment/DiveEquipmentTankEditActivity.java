@@ -85,7 +85,7 @@ public class DiveEquipmentTankEditActivity extends DiveEquipmentEditActivity {
         });
 
 
-        ArrayAdapter adapterMixture = ArrayAdapter.createFromResource(this,
+/*        ArrayAdapter adapterMixture = ArrayAdapter.createFromResource(this,
                 R.array.equipment_tank_mixture, R.layout.layout_spinner_headline);
         adapterMixture.setDropDownViewResource(R.layout.layout_drop_down_spinner);
         final Spinner spinnerTankMixture = (Spinner) findViewById(R.id.diveEquipmentTankEditMixtureValue);
@@ -98,10 +98,20 @@ public class DiveEquipmentTankEditActivity extends DiveEquipmentEditActivity {
                 String itemName = spinnerTankMixture.getSelectedItem().toString();
                 switch (itemName) {
                     case "Air":
-                            View oxygen = View.inflate(getBaseContext(), R.layout.layout_oxygen_gaz, (ViewGroup)findViewById(R.id.oxygenGazLayout));
-                            View nitrogen = View.inflate(getBaseContext(), R.layout.layout_nitrogen_gaz, (ViewGroup)findViewById(R.id.nitrogenGazLayout));
-                            mixtureLayout.addView(oxygen);
-                            mixtureLayout.addView(nitrogen);
+                            View air_oxygen = View.inflate(getBaseContext(), R.layout.layout_oxygen_gaz, (ViewGroup)findViewById(R.id.oxygenGazLayout));
+                            View air_nitrogen = View.inflate(getBaseContext(), R.layout.layout_nitrogen_gaz, (ViewGroup)findViewById(R.id.nitrogenGazLayout));
+                            mixtureLayout.addView(air_oxygen);
+                            mixtureLayout.addView(air_nitrogen);
+                            EditText oxygen_value = (EditText) air_oxygen.findViewById(R.id.oxygenGazValue);
+                            oxygen_value.setText("21");
+                            EditText nitrogen_value = (EditText) air_nitrogen.findViewById(R.id.nitrogenGazValue);
+                        nitrogen_value.setText("79");
+                        break;
+                    case "Nitrox":
+                            View nitrox_oxygen = View.inflate(getBaseContext(), R.layout.layout_oxygen_gaz, (ViewGroup)findViewById(R.id.oxygenGazLayout));
+                            View nitrox_nitrogen = View.inflate(getBaseContext(), R.layout.layout_nitrogen_gaz, (ViewGroup)findViewById(R.id.nitrogenGazLayout));
+                            mixtureLayout.addView(nitrox_oxygen);
+                            mixtureLayout.addView(nitrox_nitrogen);
                         break;
                 }
             }
@@ -111,7 +121,7 @@ public class DiveEquipmentTankEditActivity extends DiveEquipmentEditActivity {
 
             }
         });
-
+*/
         frameLayout = (FrameLayout) findViewById(R.id.diveEquipmentTankEditFrameLayout);
         startPressureValue = (TextView) findViewById(R.id.diveEquipmentTankEditStartPressureValue);
         endPressureValue = (TextView) findViewById(R.id.diveEquipmentTankEditEndPressureValue);
@@ -121,8 +131,8 @@ public class DiveEquipmentTankEditActivity extends DiveEquipmentEditActivity {
         yStartPressurePrevious = -1;
         yEndPressurePrevious = -1;
 
-        RelativeLayout startPressure = (RelativeLayout) findViewById(R.id.diveEquipmentTankEditStartPressure);
-        RelativeLayout endPressure = (RelativeLayout) findViewById(R.id.diveEquipmentTankEditEndPressure);
+        LinearLayout startPressure = (LinearLayout) findViewById(R.id.diveEquipmentTankEditStartPressureValueAndUnit);
+        LinearLayout endPressure = (LinearLayout) findViewById(R.id.diveEquipmentTankEditEndPressureValueAndUnit);
 
 
         startPressure.setOnTouchListener(new View.OnTouchListener() {
@@ -131,36 +141,39 @@ public class DiveEquipmentTankEditActivity extends DiveEquipmentEditActivity {
                 switch(event.getAction())
                 {
                     case MotionEvent.ACTION_MOVE:
+
+                        RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.diveEquipmentTankEditStartPressure);
+
                         int screenY = (int)event.getRawY();
                         if(yStartPressurePrevious < 0)
                             yStartPressurePrevious = screenY;
 
                         float viewY = screenY - yStartPressurePrevious;
 
-                        RelativeLayout test = (RelativeLayout) findViewById(R.id.diveEquipmentTankEditStartPressure);
+                        LinearLayout test = (LinearLayout) findViewById(R.id.diveEquipmentTankEditStartPressureValueAndUnit);
                         int[] coords = new int[2];
                         test.getLocationOnScreen(coords);
                         int vY = coords[1];
 
                         if(minStartPressureScreenY < 0) {
                             minStartPressureScreenY = vY;
-                            minStartPressureLayoutY = (int)v.getY();
+                            minStartPressureLayoutY = (int)relativeLayout.getY();
                         }
 
                         if(vY+viewY <= minStartPressureScreenY+pressureHeight
                         && vY+viewY >= minStartPressureScreenY) {
-                            v.setY(v.getY() + viewY);
+                            relativeLayout.setY(relativeLayout.getY() + viewY);
                             yStartPressurePrevious = screenY;
                             int pressureValue = (int)((pressureHeight - (vY+viewY- minStartPressureScreenY))*(250.0f/pressureHeight));
                             startPressureValue.setText(String.valueOf(pressureValue));
                         }
                         else if(vY+viewY < minStartPressureScreenY) {
-                            v.setY(minStartPressureLayoutY);
+                            relativeLayout.setY(minStartPressureLayoutY);
                             yStartPressurePrevious = minStartPressureScreenY;
                             startPressureValue.setText(String.valueOf(250));
                         }
                         else if(vY+viewY > minStartPressureScreenY+pressureHeight) {
-                            v.setY(minStartPressureLayoutY+pressureHeight);
+                            relativeLayout.setY(minStartPressureLayoutY+pressureHeight);
                             yStartPressurePrevious = minStartPressureScreenY+pressureHeight;
                             startPressureValue.setText(String.valueOf(0));
                         }
@@ -181,36 +194,39 @@ public class DiveEquipmentTankEditActivity extends DiveEquipmentEditActivity {
                 switch(event.getAction())
                 {
                     case MotionEvent.ACTION_MOVE:
+
+                        RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.diveEquipmentTankEditEndPressure);
+
                         int screenY = (int)event.getRawY();
                         if(yEndPressurePrevious < 0)
                             yEndPressurePrevious = screenY;
 
                         float viewY = screenY - yEndPressurePrevious;
 
-                        RelativeLayout test = (RelativeLayout) findViewById(R.id.diveEquipmentTankEditEndPressure);
+                        LinearLayout test = (LinearLayout) findViewById(R.id.diveEquipmentTankEditEndPressureValueAndUnit);
                         int[] coords = new int[2];
                         test.getLocationOnScreen(coords);
                         int vY = coords[1];
 
                         if(maxStartPressureY < 0) {
                             maxStartPressureY = vY;
-                            maxPressureLayoutY = (int)v.getY();
+                            maxPressureLayoutY = (int)relativeLayout.getY();
                         }
 
                         if(vY+viewY >= maxStartPressureY-pressureHeight
                         && vY+viewY <= maxStartPressureY) {
-                            v.setY(v.getY() + viewY);
+                            relativeLayout.setY(relativeLayout.getY() + viewY);
                             yEndPressurePrevious = screenY;
                             int pressureValue = (int)(((maxStartPressureY - vY+viewY))*(250.0f/pressureHeight));
                             endPressureValue.setText(String.valueOf(pressureValue));
                         }
                         else if(vY+viewY > maxStartPressureY) {
-                            v.setY(maxPressureLayoutY);
+                            relativeLayout.setY(maxPressureLayoutY);
                             yEndPressurePrevious = maxStartPressureY;
                             endPressureValue.setText(String.valueOf(0));
                         }
                         else if(vY+viewY < maxStartPressureY-pressureHeight) {
-                            v.setY(maxPressureLayoutY-pressureHeight);
+                            relativeLayout.setY(maxPressureLayoutY-pressureHeight);
                             yEndPressurePrevious = maxStartPressureY-pressureHeight;
                             endPressureValue.setText(String.valueOf(250));
                         }
@@ -234,8 +250,13 @@ public class DiveEquipmentTankEditActivity extends DiveEquipmentEditActivity {
 
 
     private void initEditText() {
-        EditText volumeValue = (EditText) findViewById(R.id.diveEquipmentTankEditVolumeValue);
-        editTextClearFocus(volumeValue);
+        TextView volumeValue = (TextView) findViewById(R.id.diveEquipmentTankEditVolumeValueUnit);
+        volumeValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
 
@@ -269,7 +290,7 @@ public class DiveEquipmentTankEditActivity extends DiveEquipmentEditActivity {
         int firstLineY = bgRealHeight-startRealY;
 
         ImageView tankBackground = (ImageView) findViewById(R.id.diveEquipmentTankEditImageBackground);
-        LinearLayout startPressureValueUnit = (LinearLayout) findViewById(R.id.diveEquipmentTankEditStartPressureValueUnit);
+        LinearLayout startPressureValueUnit = (LinearLayout) findViewById(R.id.diveEquipmentTankEditStartPressureValueAndUnit);
         RelativeLayout startPressure = (RelativeLayout) findViewById(R.id.diveEquipmentTankEditStartPressure);
         View startPressureLine = findViewById(R.id.diveEquipmentTankEditStartPressureLine);
 
@@ -299,7 +320,6 @@ public class DiveEquipmentTankEditActivity extends DiveEquipmentEditActivity {
         startPressure.setLayoutParams(params);
 
         placeEndPressure(bgRealWidth, bgRealHeight, bgScaledWidth, bgScaledHeight, bgPaddingLeft);
-        placeMixture(bgRealWidth, bgRealHeight, bgScaledWidth, bgScaledHeight, bgPaddingLeft);
         placeVolume(bgRealWidth, bgRealHeight, bgScaledWidth, bgScaledHeight, bgPaddingLeft);
 
         pressureHeight = (startRealY-endRealY) * bgScaledHeight / bgRealHeight;
@@ -319,7 +339,7 @@ public class DiveEquipmentTankEditActivity extends DiveEquipmentEditActivity {
                                    int bgPaddingLeft) {
         int realY = bgRealHeight-endRealY;
 
-        LinearLayout endPressureValueUnit = (LinearLayout) findViewById(R.id.diveEquipmentTankEditStartPressureValueUnit);
+        LinearLayout endPressureValueUnit = (LinearLayout) findViewById(R.id.diveEquipmentTankEditEndPressureValueAndUnit);
         RelativeLayout endPressure = (RelativeLayout) findViewById(R.id.diveEquipmentTankEditEndPressure);
         View endPressureLine = findViewById(R.id.diveEquipmentTankEditEndPressureLine);
 
@@ -357,51 +377,13 @@ public class DiveEquipmentTankEditActivity extends DiveEquipmentEditActivity {
      * @param ivScaledHeight:
      * @param bgPaddingLeft:
      */
-    private  void placeMixture(int bgRealWidth, int bgRealHeight,
-                               int ivScaledWidth, int ivScaledHeight,
-                               int bgPaddingLeft) {
-        int realX = 58;
-        int realY = bgRealHeight-150;
-
-        LinearLayout mixture = (LinearLayout) findViewById(R.id.diveEquipmentTankEditMixture);
-
-        int mixtureWidth = mixture.getWidth();
-        int mixtureHeight = mixture.getHeight();
-
-        int scaledX = realX * ivScaledHeight / bgRealHeight;
-        int scaledY = realY * ivScaledHeight / bgRealHeight;
-
-        int bgScaledWidth = bgRealWidth * ivScaledHeight / bgRealHeight;
-
-        int marginLeft = (ivScaledWidth - bgScaledWidth)/2 + bgPaddingLeft + bgScaledWidth;
-        int marginTop = scaledY - mixtureHeight/2;
-        int marginRight = 0;
-        int marginBottom = 0;
-
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.WRAP_CONTENT,
-                FrameLayout.LayoutParams.WRAP_CONTENT
-        );
-        params.setMargins(marginLeft, marginTop, marginRight, marginBottom);
-        mixture.setLayoutParams(params);
-    }
-
-
-    /**
-     *
-     * @param bgRealWidth:
-     * @param bgRealHeight:
-     * @param ivScaledWidth:
-     * @param ivScaledHeight:
-     * @param bgPaddingLeft:
-     */
     private  void placeVolume(int bgRealWidth, int bgRealHeight,
                                int ivScaledWidth, int ivScaledHeight,
                                int bgPaddingLeft) {
 
         int realY = bgRealHeight-92;
 
-        LinearLayout volume = (LinearLayout) findViewById(R.id.diveEquipmentTankEditVolumeValueUnit);
+        LinearLayout volume = (LinearLayout) findViewById(R.id.diveEquipmentTankEditVolume);
 
         int volumeWidth = volume.getWidth();
         int volumeHeight = volume.getHeight();

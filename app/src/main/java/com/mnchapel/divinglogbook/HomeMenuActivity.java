@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.ListView;
 
+import com.mnchapel.divinglogbook.com.mnchapel.divinglogbook.UploadDiveFromComputer;
 import com.mnchapel.divinglogbook.com.mnchapel.divinglogbook.model.Dive;
 import com.mnchapel.divinglogbook.com.mnchapel.divinglogbook.model.DiveXmlDocument;
 
@@ -215,21 +216,23 @@ public class HomeMenuActivity
                 fragment = new StatisticsFragment();
                 break;
             case R.id.drawer_item_load_new_dives:
-                UploadDiveActivity u = new UploadDiveActivity();
-                try {
-                    u.uploadDive(this, diveList);
-                    loadDive();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (XmlPullParserException e) {
-                    e.printStackTrace();
-                }
-
-                // Close de drawer
-                DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-                drawerLayout.closeDrawer(GravityCompat.START);
-
-                return false;
+                fragment = new UploadDiveFromComputer();
+                break;
+//                UploadDiveActivity u = new UploadDiveActivity();
+//                try {
+//                    u.uploadDive(this, diveList);
+//                    loadDive();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                } catch (XmlPullParserException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                // Close de drawer
+//                DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+//                drawerLayout.closeDrawer(GravityCompat.START);
+//
+//                return false;
             default:
                 return false;
         }
